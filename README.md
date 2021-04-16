@@ -7,7 +7,7 @@ Puntos buenos y a mejorar:
 - José Osega
 - Bryan López
 - Sebastian Villalón
-- Esteban Gonzalez
+- Esteban Rodriguez
 
 Puntos de premio y de castigo:
 -
@@ -15,4 +15,4 @@ Puntos de premio y de castigo:
 - José Osega
 - Bryan López
 - Sebastian Villalón
-- Esteban Gonzalez
+- Esteban Rodriguez
