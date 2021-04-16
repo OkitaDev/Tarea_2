@@ -4,8 +4,15 @@ Errores del Ejercicio:
 
 Puntos buenos y a mejorar:
 -
-- Jose Osega
-- Bryan Lopez
+- José Osega
+- Bryan López
+- Sebastian Villalón
+- Esteban Gonzalez
 
 Puntos de premio y de castigo:
 -
+
+- José Osega
+- Bryan López
+- Sebastian Villalón
+- Esteban Gonzalez
