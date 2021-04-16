@@ -1,2 +1,9 @@
 # Tarea_2
-Texto de prueba
+Errores del Ejercicio:
+-
+
+Puntos buenos y a mejorar:
+-
+
+Puntos de premio y de castigo:
+-
