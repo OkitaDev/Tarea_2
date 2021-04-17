@@ -4,6 +4,7 @@
 int main()
 {
     short opcion;
+
     do
     {
         mostrarMenuPokedex();
@@ -13,6 +14,11 @@ int main()
         switch(opcion)
         {
             case 1:
+                mostrarSeleccion();
+                scanf("%hi", &opcion);
+                if(opcion == 1) printf("\nSe importo\n");
+                else if(opcion == 2) printf("\nSe exporto\n");
+                else printf("\nNo se hizo nada\n");
                 break;
             case 2:
                 break;

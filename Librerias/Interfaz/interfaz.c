@@ -19,3 +19,10 @@ void mostrarMenuPokedex()
     printf("0.Salir de la Pokedex\n");
     printf("\n");
 }
+
+void mostrarSeleccion()
+{
+    printf("\n1.Importar archivo .cvs\n");
+    printf("2.Exportar archivo .csv\n");
+    printf("\n");
+}
