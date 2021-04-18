@@ -13,7 +13,7 @@ int main()
         mostrarMenuPokedex();
         scanf("%hi", &opcion);
         if(opcion == 0) break;
-        
+
         switch(opcion)
         {
             case 1:
@@ -47,7 +47,7 @@ int main()
         }
         printf("\n");
     } while (opcion != 0);
-    
+
     printf("\n -----\n");
     printf("| FIN |\n");
     printf(" -----\n\n");

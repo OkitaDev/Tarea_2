@@ -25,12 +25,12 @@ HashMap * importarArchivo(HashMap * mapa)
 
     FILE * archivo = fopen(nombreArchivo, "r");
 
-    if(archivo == NULL) 
+    if(archivo == NULL)
     {
         printf("\nArchivo NO IMPLEMENTADO!\n");
         return NULL;
     }
-
+    
     printf("\nArchivo IMPORTO!\n");
     return mapa;
 }
@@ -43,7 +43,7 @@ HashMap * exportarArchivo(HashMap * mapa)
 
     FILE * archivo = fopen(nombreArchivo, "w");
 
-    if(archivo == NULL) 
+    if(archivo == NULL)
     {
         printf("\nArchivo NO IMPLEMENTADO!\n");
         return NULL;
