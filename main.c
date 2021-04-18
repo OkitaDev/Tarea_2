@@ -1,10 +1,13 @@
 #include <stdio.h>
+
 #include "Librerias/Interfaz/interfaz.h"
+#include "Librerias/TDA_Mapa/hashmap.h"
+#include "Librerias/pokemon.h"
 
 int main()
 {
     short opcion;
-
+    HashMap * mapa = createMap(100);
     do
     {
         mostrarMenuPokedex();
@@ -16,8 +19,8 @@ int main()
             case 1:
                 mostrarSeleccion();
                 scanf("%hi", &opcion);
-                if(opcion == 1) printf("\nSe importo\n");
-                else if(opcion == 2) printf("\nSe exporto\n");
+                if(opcion == 1) importarArchivo(mapa);
+                else if(opcion == 2) exportarArchivo(mapa);
                 else printf("\nNo se hizo nada\n");
                 break;
             case 2:
