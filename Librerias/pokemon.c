@@ -22,18 +22,12 @@ typedef struct tipoPuntos
     int pCombate;
 }tipoPuntos;
 
-typedef struct tipoTipos
-{
-    char tipo1[25];
-    char tipo2[25];
-}tipoTipos;
-
 typedef struct tipoPokemon
 {
     char nombrePokemon[25];
     char region[25];
-    char sexo[10];
-    tipoTipos elemento;
+    char sexo[25];
+    char tipos[100];
     tipoPuntos puntos;
     tipoEvoluciones evol;
     tipoIdentificacion ident;
@@ -41,45 +35,44 @@ typedef struct tipoPokemon
 
 void ingresarPokemon(HashMap * mapa, char * lineaLeida)
 {
-    tipoPokemon * nuevoPokemon = malloc (sizeof(tipoPokemon));
+    tipoPokemon * nuevoPokemon = (tipoPokemon *) malloc (sizeof(tipoPokemon));
     char * fragmento;
 
     //Lectura del ID
     fragmento = strtok(lineaLeida, ",");
     nuevoPokemon->ident.id = strtol(fragmento, NULL, 10);
 
-    //Lectura del Nombre
+    //Lectura del nombre
     fragmento = strtok(NULL, ",");
     strcpy(nuevoPokemon->nombrePokemon, fragmento);
 
-    //Lectura del Tipo 1
+    //Lectura de los tipos
     fragmento = strtok(NULL, ",");
-    strcpy(nuevoPokemon->elemento.tipo1, fragmento);
-    
-    //Eliminacion comillas iniciales
+
+    //Se verifica si posee 1 o mas tipos
     if(fragmento[0] == '"')
     {
-        memmove(nuevoPokemon->elemento.tipo1, nuevoPokemon->elemento.tipo1 + 1, strlen(nuevoPokemon->elemento.tipo1));
-    }
+        //Eliminacion de las primeras comillas
+        memmove(fragmento, fragmento + 1, strlen(fragmento));
+        strcpy(nuevoPokemon->tipos, fragmento);
+        short largo;
+        
+        //Reiteracion hasta que no hayan mas tipos
+        do
+        {
+            fragmento = strtok(NULL, ",");
+            largo = strlen(fragmento) - 1;
+            if(fragmento[largo] != '"') strcat(nuevoPokemon->tipos, fragmento);
+        } while (fragmento[largo] != '"');
 
-    //Lectura del Tipo 2
+        //Eliminacion de la comillas finales
+        fragmento[largo] = '\0';
+        strcat(nuevoPokemon->tipos, fragmento);
+    } 
+    else strcpy(nuevoPokemon->tipos, fragmento);    
+
+    //Lectura de los puntos de Combate
     fragmento = strtok(NULL, ",");
-    short posee2Tipos = 0;
-
-    if(fragmento[strlen(fragmento) - 1] == '"')
-    {
-        //Eliminacion comillas finales
-        short largo = strlen(fragmento);
-        fragmento[largo - 1] = '\0';
-        
-        //ELiminacion espacio inicial
-        memmove(nuevoPokemon->elemento.tipo2, nuevoPokemon->elemento.tipo2 + 1, strlen(nuevoPokemon->elemento.tipo1));
-        
-        strcpy(nuevoPokemon->elemento.tipo2, fragmento);
-        posee2Tipos = 1;
-    }
-    //Lectura de los Puntos de Combate
-    if(posee2Tipos != 0) fragmento = strtok(NULL, ",");
     nuevoPokemon->puntos.pCombate = strtol(fragmento, NULL, 10);
 
     //Lectura de los Puntos de Salud
@@ -89,21 +82,21 @@ void ingresarPokemon(HashMap * mapa, char * lineaLeida)
     //Lectura del sexo del Pokemon
     fragmento = strtok(NULL,",");
     strcpy(nuevoPokemon->sexo, fragmento);
-    
+
     //Lectura de las evoluciones
     fragmento = strtok(NULL,",");
     strcpy(nuevoPokemon->evol.evolPrevia, fragmento);
     fragmento = strtok(NULL,",");
     strcpy(nuevoPokemon->evol.evolSiguiente, fragmento);
-    
+
     //Lectura del numero de la Pokedex
     fragmento = strtok(NULL, ",");
     nuevoPokemon->ident.idPokedex = strtol(fragmento, NULL, 10);
-    
+
     //Lectura de la Region
     fragmento = strtok(NULL,",");
     strcpy(nuevoPokemon->region, fragmento);
-    }
+}
 
 HashMap * importarArchivo(HashMap * mapa)
 {
@@ -127,14 +120,11 @@ HashMap * importarArchivo(HashMap * mapa)
 
     while(fgets(lineaLeida, 99, archivo))
     {
-        if(lecturaPrimeraLinea != 0)
-        {
-            ingresarPokemon(mapa, lineaLeida);
-        }
+        if(lecturaPrimeraLinea != 0) ingresarPokemon(mapa, lineaLeida);
         lecturaPrimeraLinea++;
     }
-    
-    printf("\nArchivo IMPORTO!\n");
+
+    printf("\nArchivo IMPLEMENTADO!\n");
     fclose(archivo);
     return mapa;
 }
