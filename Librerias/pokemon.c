@@ -37,11 +37,12 @@ void ingresarPokemon(HashMap * mapa, char * lineaLeida)
 {
     tipoPokemon * nuevoPokemon = (tipoPokemon *) malloc (sizeof(tipoPokemon));
     char * fragmento;
-
+	int id;
+	
     //Lectura del ID
     fragmento = strtok(lineaLeida, ",");
     nuevoPokemon->ident.id = strtol(fragmento, NULL, 10);
-
+	
     //Lectura del nombre
     fragmento = strtok(NULL, ",");
     strcpy(nuevoPokemon->nombrePokemon, fragmento);
@@ -96,6 +97,10 @@ void ingresarPokemon(HashMap * mapa, char * lineaLeida)
     //Lectura de la Region
     fragmento = strtok(NULL,",");
     strcpy(nuevoPokemon->region, fragmento);
+	
+	//Añadir Pokemon al Mapa (Con clave = nombre)
+    insertMap(mapa, nuevoPokemon->nombrePokemon, nuevoPokemon);
+    tipoPokemon * aux = searchMap(mapa, nuevoPokemon->nombrePokemon);
 }
 
 HashMap * importarArchivo(HashMap * mapa)
@@ -115,10 +120,10 @@ HashMap * importarArchivo(HashMap * mapa)
     }
 
     //Lectura del archivo (saltandose la primera linea)
-    char lineaLeida[100];
+    char lineaLeida[101];
     short lecturaPrimeraLinea = 0;
 
-    while(fgets(lineaLeida, 99, archivo))
+    while(fgets(lineaLeida, 100, archivo))
     {
         if(lecturaPrimeraLinea != 0) ingresarPokemon(mapa, lineaLeida);
         lecturaPrimeraLinea++;
@@ -146,4 +151,33 @@ HashMap * exportarArchivo(HashMap * mapa)
     printf("\nArchivo EXPORTADO!\n");
     fclose(archivo);
     return mapa;
+}
+
+void buscarPokemonNombre(HashMap * mapa)
+{
+    char nombreBuscado[25];
+    tipoPokemon * pokemonAuxiliar = firstMap(mapa);
+    short existePokemon = 0;
+
+    //Ingreso del nombre del Pokemon
+    printf("\nIngrese el nombre del Pokemon a buscar: ");
+    scanf("%s", nombreBuscado);
+    
+    /*Se recorre el Mapa, ya que no se sabe la cantidad de Pokemons
+    atrapados con el mismo nombre, en vez de usar la funcion searchMap,
+    ya que esta entrega solo uno de los posibles pokemon*/
+    while(pokemonAuxiliar != NULL)
+    {
+        if(strcmp(pokemonAuxiliar->nombrePokemon, nombreBuscado) == 0)
+        {
+            printf("%i %s ", pokemonAuxiliar->ident.id, pokemonAuxiliar->nombrePokemon);
+            printf("%i %i\n", pokemonAuxiliar->puntos.pSalud, pokemonAuxiliar->puntos.pCombate);
+            existePokemon = 1;
+        } 
+        pokemonAuxiliar = nextMap(mapa);
+    }
+
+    //Si no se encuentra
+    if(existePokemon == 0) printf("No ha atrapado %s\n", nombreBuscado);
+
 }

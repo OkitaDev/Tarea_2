@@ -22,7 +22,7 @@ void mostrarMenuPokedex()
 
 void mostrarSeleccion()
 {
-    printf("\n1.Importar archivo .cvs\n");
+    printf("\n1.Importar archivo .csv\n");
     printf("2.Exportar archivo .csv\n");
     printf("\n");
 }

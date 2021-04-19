@@ -8,6 +8,7 @@ int main()
 {
     short opcion;
     HashMap * mapa = createMap(100);
+
     do
     {
         mostrarMenuPokedex();
@@ -30,6 +31,8 @@ int main()
             case 4:
                 break;
             case 5:
+                //Funciona solo si ya se implemento el archivo
+                buscarPokemonNombre(mapa);
                 break;
             case 6:
                 break;

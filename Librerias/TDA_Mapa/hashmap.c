@@ -9,44 +9,48 @@ typedef struct Pair Pair;
 typedef struct HashMap HashMap;
 int enlarge_called=0;
 
-struct Pair {
-     char * key;
-     void * value;
+struct Pair 
+{
+    char * key;
+    void * value;
 };
 
-struct HashMap {
+struct HashMap 
+{
     Pair ** buckets;
     long size; //cantidad de datos/pairs en la tabla
     long capacity; //capacidad de la tabla
     long current; //indice del ultimo dato accedido
 };
 
-Pair * createPair( char * key,  void * value) {
+Pair * createPair(char * key,  void * value) 
+{
     Pair * new = (Pair *)malloc(sizeof(Pair));
     new->key = key;
     new->value = value;
     return new;
 }
 
-long hash( char * key, long capacity) {
+long hash( char * key, long capacity) 
+{
     unsigned long hash = 0;
-     char * ptr;
-    for (ptr = key; *ptr != '\0'; ptr++) {
+    char * ptr;
+    for (ptr = key; *ptr != '\0'; ptr++) 
+	{
         hash += hash*32 + tolower(*ptr);
     }
     return hash%capacity;
 }
 
-int is_equal(void* key1, void* key2){
+int is_equal(void* key1, void* key2)
+{
     if(key1 == NULL || key2 == NULL) return 0;
     if(strcmp((char*)key1,(char*)key2) == 0) return 1;
     return 0;
 }
 
-
 void insertMap(HashMap * map, char * key, void * value) 
 {
-	Pair * nuevoValor = createPair(key, value);
 	long indice = hash(key, map->capacity);
 
 	while(map->buckets[indice] != NULL)
@@ -55,13 +59,14 @@ void insertMap(HashMap * map, char * key, void * value)
 		indice %= map->capacity;
 	}
 
-	map->buckets[indice] = nuevoValor;
+	map->buckets[indice] = createPair(key, value);
 	map->size++;
 	map->current = indice;
 }
 
-void enlarge(HashMap * map) {
-  enlarge_called = 1; //no borrar (testing purposes)
+void enlarge(HashMap * map) 
+{
+	enlarge_called = 1; //no borrar (testing purposes)
 	Pair ** oldBuckets = map->buckets;
 
 	map->capacity *= 2;
@@ -75,7 +80,6 @@ void enlarge(HashMap * map) {
 	}
 	
 }
-
 
 HashMap * createMap(long capacity) 
 {
