@@ -4,6 +4,7 @@
 typedef struct tipoIdentificacion tipoIdentificacion;
 typedef struct tipoEvoluciones tipoEvoluciones;
 typedef struct tipoPuntos tipoPuntos;
+typedef struct tipoTipos tipoTipos;
 typedef struct tipoPokemon tipoPokemon;
 
 void ingresarPokemon(HashMap *, char *);

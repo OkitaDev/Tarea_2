@@ -22,11 +22,18 @@ typedef struct tipoPuntos
     int pCombate;
 }tipoPuntos;
 
+typedef struct tipoTipos
+{
+    char tipo1[25];
+    char tipo2[25];
+}tipoTipos;
+
 typedef struct tipoPokemon
 {
     char nombrePokemon[25];
-    char tipos[100];
     char region[25];
+    char sexo[10];
+    tipoTipos elemento;
     tipoPuntos puntos;
     tipoEvoluciones evol;
     tipoIdentificacion ident;
@@ -34,12 +41,69 @@ typedef struct tipoPokemon
 
 void ingresarPokemon(HashMap * mapa, char * lineaLeida)
 {
-    tipoPokemon * nuevoPokemon = malloc (sizeof(tipoPokemon *));
+    tipoPokemon * nuevoPokemon = malloc (sizeof(tipoPokemon));
     char * fragmento;
 
+    //Lectura del ID
     fragmento = strtok(lineaLeida, ",");
-    printf("%s\n", fragmento);
-}
+    nuevoPokemon->ident.id = strtol(fragmento, NULL, 10);
+
+    //Lectura del Nombre
+    fragmento = strtok(NULL, ",");
+    strcpy(nuevoPokemon->nombrePokemon, fragmento);
+
+    //Lectura del Tipo 1
+    fragmento = strtok(NULL, ",");
+    strcpy(nuevoPokemon->elemento.tipo1, fragmento);
+    
+    //Eliminacion comillas iniciales
+    if(fragmento[0] == '"')
+    {
+        memmove(nuevoPokemon->elemento.tipo1, nuevoPokemon->elemento.tipo1 + 1, strlen(nuevoPokemon->elemento.tipo1));
+    }
+
+    //Lectura del Tipo 2
+    fragmento = strtok(NULL, ",");
+    short posee2Tipos = 0;
+
+    if(fragmento[strlen(fragmento) - 1] == '"')
+    {
+        //Eliminacion comillas finales
+        short largo = strlen(fragmento);
+        fragmento[largo - 1] = '\0';
+        
+        //ELiminacion espacio inicial
+        memmove(nuevoPokemon->elemento.tipo2, nuevoPokemon->elemento.tipo2 + 1, strlen(nuevoPokemon->elemento.tipo1));
+        
+        strcpy(nuevoPokemon->elemento.tipo2, fragmento);
+        posee2Tipos = 1;
+    }
+    //Lectura de los Puntos de Combate
+    if(posee2Tipos != 0) fragmento = strtok(NULL, ",");
+    nuevoPokemon->puntos.pCombate = strtol(fragmento, NULL, 10);
+
+    //Lectura de los Puntos de Salud
+    fragmento = strtok(NULL, ",");
+    nuevoPokemon->puntos.pSalud = strtol(fragmento, NULL, 10);
+
+    //Lectura del sexo del Pokemon
+    fragmento = strtok(NULL,",");
+    strcpy(nuevoPokemon->sexo, fragmento);
+    
+    //Lectura de las evoluciones
+    fragmento = strtok(NULL,",");
+    strcpy(nuevoPokemon->evol.evolPrevia, fragmento);
+    fragmento = strtok(NULL,",");
+    strcpy(nuevoPokemon->evol.evolSiguiente, fragmento);
+    
+    //Lectura del numero de la Pokedex
+    fragmento = strtok(NULL, ",");
+    nuevoPokemon->ident.idPokedex = strtol(fragmento, NULL, 10);
+    
+    //Lectura de la Region
+    fragmento = strtok(NULL,",");
+    strcpy(nuevoPokemon->region, fragmento);
+    }
 
 HashMap * importarArchivo(HashMap * mapa)
 {
