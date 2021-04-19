@@ -43,7 +43,6 @@ void ingresarPokemon(HashMap * mapa, char * lineaLeida)
 {
     tipoPokemon * nuevoPokemon = malloc (sizeof(tipoPokemon));
     char * fragmento;
-
     //Lectura del ID
     fragmento = strtok(lineaLeida, ",");
     nuevoPokemon->ident.id = strtol(fragmento, NULL, 10);
