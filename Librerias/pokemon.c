@@ -170,8 +170,10 @@ void buscarPokemonNombre(HashMap * mapa)
     {
         if(strcmp(pokemonAuxiliar->nombrePokemon, nombreBuscado) == 0)
         {
-            printf("%i %s ", pokemonAuxiliar->ident.id, pokemonAuxiliar->nombrePokemon);
-            printf("%i %i\n", pokemonAuxiliar->puntos.pSalud, pokemonAuxiliar->puntos.pCombate);
+            printf("\n%s Sexo: %s\n", pokemonAuxiliar->nombrePokemon, pokemonAuxiliar->sexo);
+            printf("Tipo(s): %s\n", pokemonAuxiliar->tipos);
+            printf("ID: %i Pokedex: %i\n", pokemonAuxiliar->ident.id, pokemonAuxiliar->ident.idPokedex);
+            printf("PS: %i PC: %i\n", pokemonAuxiliar->puntos.pSalud, pokemonAuxiliar->puntos.pSalud);
             existePokemon = 1;
         } 
         pokemonAuxiliar = nextMap(mapa);
