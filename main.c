@@ -32,7 +32,8 @@ int main()
                 break;
             case 5:
                 //Funciona solo si ya se implemento el archivo
-                buscarPokemonNombre(mapa);
+                if(size(mapa) != 0) buscarPokemonNombre(mapa);
+                else printf("\nNo posee Pokemons\n");
                 break;
             case 6:
                 break;

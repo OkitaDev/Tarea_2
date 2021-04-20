@@ -1,3 +1,2 @@
-- Funcion 5, evitar que colapse si el mapa esta vacio
 - Funcion 5, revisar si hay otra forma de hacerla
 - Funcion Hash, revisar como usar key de int 

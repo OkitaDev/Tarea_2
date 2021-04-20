@@ -161,3 +161,8 @@ void * nextMap(HashMap * map)
 	}
 	return NULL;
 }
+
+long size (HashMap * map)
+{
+	return map->size;
+}

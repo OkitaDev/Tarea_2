@@ -144,7 +144,7 @@ HashMap * exportarArchivo(HashMap * mapa)
 
     if(archivo == NULL)
     {
-        printf("\nArchivo NO IMPLEMENTADO!\n");
+        printf("\nArchivo NO EXPORTADO!\n");
         return NULL;
     }
 
