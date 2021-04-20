@@ -37,7 +37,6 @@ void ingresarPokemon(HashMap * mapa, char * lineaLeida)
 {
     tipoPokemon * nuevoPokemon = (tipoPokemon *) malloc (sizeof(tipoPokemon));
     char * fragmento;
-	int id;
 	
     //Lectura del ID
     fragmento = strtok(lineaLeida, ",");
@@ -100,7 +99,6 @@ void ingresarPokemon(HashMap * mapa, char * lineaLeida)
 	
 	//Añadir Pokemon al Mapa (Con clave = nombre)
     insertMap(mapa, nuevoPokemon->nombrePokemon, nuevoPokemon);
-    tipoPokemon * aux = searchMap(mapa, nuevoPokemon->nombrePokemon);
 }
 
 HashMap * importarArchivo(HashMap * mapa)
