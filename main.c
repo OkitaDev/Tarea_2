@@ -25,13 +25,13 @@ int main()
                 else printf("\nNo se hizo nada\n");
                 break;
             case 2:
+                atraparPokemon(mapa);
                 break;
             case 3:
                 break;
             case 4:
                 break;
             case 5:
-                //Funciona solo si ya se implemento el archivo
                 if(size(mapa) != 0) buscarPokemonNombre(mapa);
                 else printf("\nNo posee Pokemons\n");
                 break;

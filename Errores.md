@@ -1,2 +1,3 @@
 - Funcion 5, revisar si hay otra forma de hacerla
+- Funcion 5, se debe implementar si o si el archivo, si se agrega un pokemon no se puede usar
 - Funcion Hash, revisar como usar key de int 
