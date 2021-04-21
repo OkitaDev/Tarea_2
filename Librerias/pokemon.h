@@ -4,9 +4,8 @@
 typedef struct tipoPokemon tipoPokemon;
 
 HashMap * importarArchivo(HashMap *);
-
 HashMap * exportarArchivo(HashMap *);
-
+void atraparPokemon(HashMap *);
 void buscarPokemonNombre(HashMap *);
 
 #endif /* pokemon.h */
