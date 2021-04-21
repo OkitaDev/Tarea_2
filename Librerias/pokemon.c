@@ -105,8 +105,9 @@ HashMap * importarArchivo(HashMap * mapa)
 {
     //Ingreso del nombre del archivo a implementar
     char nombreArchivo[40];
-    printf("\nIngrese el nombre del archivo (Incluyendo el .cvs)\n\n");
-    scanf("%39s", nombreArchivo);
+    printf("\nIngrese el nombre del archivo (Incluyendo el .csv)\n\n");
+    fflush(stdin);
+    scanf("%39[^\n]s", nombreArchivo);
 
     //Busqueda del archivo
     FILE * archivo = fopen(nombreArchivo, "r");
@@ -135,8 +136,10 @@ HashMap * importarArchivo(HashMap * mapa)
 HashMap * exportarArchivo(HashMap * mapa)
 {
     char nombreArchivo[40];
-    printf("\nIngrese el nombre del nuevo archivo (Incluyendo el .cvs)\n\n");
-    scanf("%39s", nombreArchivo);
+    
+    printf("\nIngrese el nombre del nuevo archivo (Incluyendo el .csv)\n\n");
+    fflush(stdin);
+    scanf("%39[^\n]s", nombreArchivo);
 
     FILE * archivo = fopen(nombreArchivo, "w");
 
@@ -159,40 +162,45 @@ void atraparPokemon(HashMap * mapa)
     //Ingreso del nombre
     printf("\nIngrese el nombre del Pokemon: ");
     fflush(stdin);
-    scanf("%[^25\n]s", pokemonAtrapado->nombrePokemon);
+    scanf("%25[^\n]s", pokemonAtrapado->nombrePokemon);
 
     //Ingreso de los tipos
     printf("\nIngrese el tipo(s) del Pokemon: ");
     fflush(stdin);
-    scanf("%[^100\n]s", pokemonAtrapado->tipos);
+    scanf("%100[^\n]s", pokemonAtrapado->tipos);
 
     //Ingreso de PC y PS
     printf("\nIngrese los PS del Pokemon: ");
+    fflush(stdin);
     scanf("%i", &pokemonAtrapado->puntos.pSalud);
+    
     printf("\nIngrese los PC del Pokemon: ");
+    fflush(stdin);
     scanf("%i", &pokemonAtrapado->puntos.pCombate);
 
     //Ingreso del sexo del Pokemon
     printf("\nIngrese el sexo del Pokemon: ");
     fflush(stdin);
-    scanf("%[^25\n]s", pokemonAtrapado->sexo);
+    scanf("%25[^\n]s", pokemonAtrapado->sexo);
 
     //Ingreso de las evoluciones
     printf("\nIngrese la evolucion anterior del Pokemon: ");
     fflush(stdin);
-    scanf("%[^25\n]s", pokemonAtrapado->evol.evolPrevia);
+    scanf("%25[^\n]s", pokemonAtrapado->evol.evolPrevia);
+
     printf("\nIngrese la evolucion siguiente del Pokemon: ");
     fflush(stdin);
-    scanf("%[^25\n]s", pokemonAtrapado->evol.evolSiguiente);
+    scanf("%25[^\n]s", pokemonAtrapado->evol.evolSiguiente);
 
     //Ingreso del numero de la Pokedex
     printf("\nIngrese el numero de ubicacion de la Pokedex: ");
+    fflush(stdin);
     scanf("%i", &pokemonAtrapado->ident.idPokedex);
 
     //Ingreso de la region del Pokemon
     printf("\nIngrese la region originaria del Pokemon: ");
     fflush(stdin);
-    scanf("%[^25\n]s", pokemonAtrapado->region);
+    scanf("%25[^\n]s", pokemonAtrapado->region);
 
     //Ingreso al mapa
     insertMap(mapa, pokemonAtrapado->nombrePokemon, pokemonAtrapado);
@@ -207,14 +215,13 @@ void buscarPokemonNombre(HashMap * mapa)
     //Ingreso del nombre del Pokemon
     printf("\nIngrese el nombre del Pokemon a buscar: ");
     fflush(stdin);
-    scanf("%[^25\n]s", nombreBuscado);
+    scanf("%25[^\n]s", nombreBuscado);
     
     /*Se recorre el Mapa, ya que no se sabe la cantidad de Pokemons
     atrapados con el mismo nombre, en vez de usar la funcion searchMap,
     ya que esta entrega solo uno de los posibles pokemon*/
     while(pokemonAuxiliar != NULL)
     {
-        if(pokemonAuxiliar->ident.id == 1) printf("%s \n", pokemonAuxiliar->nombrePokemon);
         if(strcmp(pokemonAuxiliar->nombrePokemon, nombreBuscado) == 0)
         {
             printf("\n%s Sexo: %s\n", pokemonAuxiliar->nombrePokemon, pokemonAuxiliar->sexo);
@@ -227,6 +234,6 @@ void buscarPokemonNombre(HashMap * mapa)
     }
 
     //Si no se encuentra
-    if(existePokemon == 0) printf("No ha atrapado %s\n", nombreBuscado);
+    if(existePokemon == 0) printf("\nNo ha atrapado %s\n", nombreBuscado);
 
 }

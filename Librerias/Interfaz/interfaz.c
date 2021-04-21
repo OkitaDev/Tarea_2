@@ -17,12 +17,13 @@ void mostrarMenuPokedex()
     printf("9. Liberar un Pokemon\n");
     printf("10. Mostrar Pokemon por Region\n");
     printf("0. Salir de la Pokedex\n");
-    printf("\n");
+    printf("\nElija una opcion: ");
 }
 
 void mostrarSeleccion()
 {
     printf("\n1. Importar archivo .csv\n");
     printf("2. Exportar archivo .csv\n");
-    printf("\n");
+    
+    printf("\nElija una opcion: ");
 }

@@ -12,6 +12,7 @@ int main()
     do
     {
         mostrarMenuPokedex();
+        fflush(stdin);
         scanf("%hi", &opcion);
         if(opcion == 0) break;
 
@@ -33,7 +34,7 @@ int main()
                 break;
             case 5:
                 if(size(mapa) != 0) buscarPokemonNombre(mapa);
-                else printf("\nNo posee Pokemons\n");
+                else printf("\nNo ha atrapado algun Pokemon\n");
                 break;
             case 6:
                 break;
