@@ -8,6 +8,7 @@ typedef struct tipoIdentificacion
 {
   int id;
   int idPokedex;
+  int ocurrencia;
 }tipoIdentificacion;
 
 typedef struct tipoEvoluciones
@@ -37,11 +38,11 @@ void ingresarPokemon(HashMap * mapa, char * lineaLeida)
 {
     tipoPokemon * nuevoPokemon = (tipoPokemon *) malloc (sizeof(tipoPokemon));
     char * fragmento;
-	
+
     //Lectura del ID
     fragmento = strtok(lineaLeida, ",");
     nuevoPokemon->ident.id = strtol(fragmento, NULL, 10);
-	
+
     //Lectura del nombre
     fragmento = strtok(NULL, ",");
     strcpy(nuevoPokemon->nombrePokemon, fragmento);
@@ -56,7 +57,7 @@ void ingresarPokemon(HashMap * mapa, char * lineaLeida)
         memmove(fragmento, fragmento + 1, strlen(fragmento));
         strcpy(nuevoPokemon->tipos, fragmento);
         short largo;
-        
+
         //Reiteracion hasta que no hayan mas tipos
         do
         {
@@ -68,8 +69,8 @@ void ingresarPokemon(HashMap * mapa, char * lineaLeida)
         //Eliminacion de la comillas finales
         fragmento[largo] = '\0';
         strcat(nuevoPokemon->tipos, fragmento);
-    } 
-    else strcpy(nuevoPokemon->tipos, fragmento);    
+    }
+    else strcpy(nuevoPokemon->tipos, fragmento);
 
     //Lectura de los puntos de Combate
     fragmento = strtok(NULL, ",");
@@ -97,7 +98,7 @@ void ingresarPokemon(HashMap * mapa, char * lineaLeida)
     fragmento = strtok(NULL,",");
     strcpy(nuevoPokemon->region, fragmento);
 
-	//Añadir Pokemon al Mapa (Con clave = nombre)
+	  //Añadir Pokemon al Mapa (Con clave = nombre)
     insertMap(mapa, nuevoPokemon->nombrePokemon, nuevoPokemon);
 }
 
@@ -124,6 +125,13 @@ HashMap * importarArchivo(HashMap * mapa)
 
     while(fgets(lineaLeida, 100, archivo))
     {
+        if(size(mapa) >= 100)
+        {
+          printf("\nHa superado el maximo de Pokemons\n");
+          printf("Se han podido implementar %i pokemons!\n", lecturaPrimeraLinea - 1);
+          return mapa;
+        }
+
         if(lecturaPrimeraLinea != 0) ingresarPokemon(mapa, lineaLeida);
         lecturaPrimeraLinea++;
     }
@@ -136,7 +144,7 @@ HashMap * importarArchivo(HashMap * mapa)
 HashMap * exportarArchivo(HashMap * mapa)
 {
     char nombreArchivo[40];
-    
+
     printf("\nIngrese el nombre del nuevo archivo (Incluyendo el .csv)\n\n");
     fflush(stdin);
     scanf("%39[^\n]s", nombreArchivo);
@@ -158,7 +166,7 @@ void atraparPokemon(HashMap * mapa)
 {
     //Creacion de variable del pokemon atrapado
     tipoPokemon * pokemonAtrapado = malloc(sizeof(tipoPokemon));
-    
+
     //Ingreso del nombre
     printf("\nIngrese el nombre del Pokemon: ");
     fflush(stdin);
@@ -173,7 +181,7 @@ void atraparPokemon(HashMap * mapa)
     printf("\nIngrese los PS del Pokemon: ");
     fflush(stdin);
     scanf("%i", &pokemonAtrapado->puntos.pSalud);
-    
+
     printf("\nIngrese los PC del Pokemon: ");
     fflush(stdin);
     scanf("%i", &pokemonAtrapado->puntos.pCombate);
@@ -216,7 +224,7 @@ void buscarPokemonNombre(HashMap * mapa)
     printf("\nIngrese el nombre del Pokemon a buscar: ");
     fflush(stdin);
     scanf("%25[^\n]s", nombreBuscado);
-    
+
     /*Se recorre el Mapa ya que no se sabe la cantidad de Pokemons
     atrapados con el mismo nombre, en vez de usar la funcion searchMap,
     ya que esta entrega solo uno de los posibles pokemon*/
@@ -229,7 +237,7 @@ void buscarPokemonNombre(HashMap * mapa)
             printf("ID: %i Pokedex: %i\n", pokemonAuxiliar->ident.id, pokemonAuxiliar->ident.idPokedex);
             printf("PS: %i PC: %i\n", pokemonAuxiliar->puntos.pSalud, pokemonAuxiliar->puntos.pCombate);
             existePokemon = 1;
-        } 
+        }
         pokemonAuxiliar = nextMap(mapa);
     }
 

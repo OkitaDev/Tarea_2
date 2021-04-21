@@ -1,3 +1,3 @@
 - Funcion buscarPokemon, revisar si hay otra forma de hacerla
-- Funcion atraparPokemon y importarArchivo, indicar que pasa si hay mas de un pokemon con el mismo nombre o id, hacer una clausula cuando hayan mas de 100 pkmns
+- Funcion atraparPokemon y importarArchivo, indicar que pasa si hay mas de un pokemon con el mismo nombre o id
 - Funcion Hash, revisar como usar key de int
