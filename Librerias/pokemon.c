@@ -217,7 +217,7 @@ void buscarPokemonNombre(HashMap * mapa)
     fflush(stdin);
     scanf("%25[^\n]s", nombreBuscado);
     
-    /*Se recorre el Mapa, ya que no se sabe la cantidad de Pokemons
+    /*Se recorre el Mapa ya que no se sabe la cantidad de Pokemons
     atrapados con el mismo nombre, en vez de usar la funcion searchMap,
     ya que esta entrega solo uno de los posibles pokemon*/
     while(pokemonAuxiliar != NULL)
