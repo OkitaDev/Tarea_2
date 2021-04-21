@@ -1,2 +1,3 @@
-- Funcion 5, revisar si hay otra forma de hacerla
+- Funcion buscarPokemon, revisar si hay otra forma de hacerla
+- Funcion atraparPokemon y importarArchivo, indicar que papsa si hay mas de un pokemon con el mismo nombre o id
 - Funcion Hash, revisar como usar key de int 
