@@ -158,11 +158,13 @@ void atraparPokemon(HashMap * mapa)
     
     //Ingreso del nombre
     printf("\nIngrese el nombre del Pokemon: ");
-    scanf("%s", pokemonAtrapado->nombrePokemon);
+    fflush(stdin);
+    scanf("%[^25\n]s", pokemonAtrapado->nombrePokemon);
 
     //Ingreso de los tipos
     printf("\nIngrese el tipo(s) del Pokemon: ");
-    scanf("%s", pokemonAtrapado->tipos);
+    fflush(stdin);
+    scanf("%[^100\n]s", pokemonAtrapado->tipos);
 
     //Ingreso de PC y PS
     printf("\nIngrese los PS del Pokemon: ");
@@ -172,13 +174,16 @@ void atraparPokemon(HashMap * mapa)
 
     //Ingreso del sexo del Pokemon
     printf("\nIngrese el sexo del Pokemon: ");
-    scanf("%s", pokemonAtrapado->sexo);
+    fflush(stdin);
+    scanf("%[^25\n]s", pokemonAtrapado->sexo);
 
     //Ingreso de las evoluciones
     printf("\nIngrese la evolucion anterior del Pokemon: ");
-    scanf("%s", pokemonAtrapado->evol.evolPrevia);
+    fflush(stdin);
+    scanf("%[^25\n]s", pokemonAtrapado->evol.evolPrevia);
     printf("\nIngrese la evolucion siguiente del Pokemon: ");
-    scanf("%s", pokemonAtrapado->evol.evolSiguiente);
+    fflush(stdin);
+    scanf("%[^25\n]s", pokemonAtrapado->evol.evolSiguiente);
 
     //Ingreso del numero de la Pokedex
     printf("\nIngrese el numero de ubicacion de la Pokedex: ");
@@ -186,10 +191,8 @@ void atraparPokemon(HashMap * mapa)
 
     //Ingreso de la region del Pokemon
     printf("\nIngrese la region originaria del Pokemon: ");
-    scanf("%s", pokemonAtrapado->region);
-
-    //Añadir ID
-    pokemonAtrapado->ident.id = (int) size(mapa) + 1;
+    fflush(stdin);
+    scanf("%[^25\n]s", pokemonAtrapado->region);
 
     //Ingreso al mapa
     insertMap(mapa, pokemonAtrapado->nombrePokemon, pokemonAtrapado);
@@ -203,13 +206,15 @@ void buscarPokemonNombre(HashMap * mapa)
 
     //Ingreso del nombre del Pokemon
     printf("\nIngrese el nombre del Pokemon a buscar: ");
-    scanf("%s", nombreBuscado);
+    fflush(stdin);
+    scanf("%[^25\n]s", nombreBuscado);
     
     /*Se recorre el Mapa, ya que no se sabe la cantidad de Pokemons
     atrapados con el mismo nombre, en vez de usar la funcion searchMap,
     ya que esta entrega solo uno de los posibles pokemon*/
     while(pokemonAuxiliar != NULL)
     {
+        if(pokemonAuxiliar->ident.id == 1) printf("%s \n", pokemonAuxiliar->nombrePokemon);
         if(strcmp(pokemonAuxiliar->nombrePokemon, nombreBuscado) == 0)
         {
             printf("\n%s Sexo: %s\n", pokemonAuxiliar->nombrePokemon, pokemonAuxiliar->sexo);
