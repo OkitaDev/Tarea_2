@@ -131,12 +131,6 @@ void * searchMap(HashMap * map,  char * key) {
 
 void * firstMap(HashMap * map) 
 {	
-	if(map->buckets[0]->key != NULL)
-	{
-		map->current = 0;
-		return map->buckets[0]->value;
-	}
-
 	long indice = map->current + 1;
 
 	while(map->buckets[indice] == NULL)
@@ -144,6 +138,8 @@ void * firstMap(HashMap * map)
 		indice++;
 		indice %= map->capacity;
 	}
+
+	if(map->buckets[0] != NULL) indice = 0;
 
 	map->current = indice;
 	return map->buckets[indice]->value;

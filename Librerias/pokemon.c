@@ -96,7 +96,7 @@ void ingresarPokemon(HashMap * mapa, char * lineaLeida)
     //Lectura de la Region
     fragmento = strtok(NULL,",");
     strcpy(nuevoPokemon->region, fragmento);
-	
+
 	//Añadir Pokemon al Mapa (Con clave = nombre)
     insertMap(mapa, nuevoPokemon->nombrePokemon, nuevoPokemon);
 }
@@ -188,6 +188,9 @@ void atraparPokemon(HashMap * mapa)
     printf("\nIngrese la region originaria del Pokemon: ");
     scanf("%s", pokemonAtrapado->region);
 
+    //Añadir ID
+    pokemonAtrapado->ident.id = (int) size(mapa) + 1;
+
     //Ingreso al mapa
     insertMap(mapa, pokemonAtrapado->nombrePokemon, pokemonAtrapado);
 }
@@ -212,7 +215,7 @@ void buscarPokemonNombre(HashMap * mapa)
             printf("\n%s Sexo: %s\n", pokemonAuxiliar->nombrePokemon, pokemonAuxiliar->sexo);
             printf("Tipo(s): %s\n", pokemonAuxiliar->tipos);
             printf("ID: %i Pokedex: %i\n", pokemonAuxiliar->ident.id, pokemonAuxiliar->ident.idPokedex);
-            printf("PS: %i PC: %i\n", pokemonAuxiliar->puntos.pSalud, pokemonAuxiliar->puntos.pSalud);
+            printf("PS: %i PC: %i\n", pokemonAuxiliar->puntos.pSalud, pokemonAuxiliar->puntos.pCombate);
             existePokemon = 1;
         } 
         pokemonAuxiliar = nextMap(mapa);
