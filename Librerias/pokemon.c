@@ -236,7 +236,7 @@ void atraparPokemon(HashMap * mapa)
     printf("\nIngrese la region originaria del Pokemon: ");
     fflush(stdin);
     scanf("%25[^\n]s", pokemonAtrapado->region);
-
+    strcat(pokemonAtrapado->region, "\n");
     //Ingreso al mapa
     insertMap(mapa, pokemonAtrapado->nombrePokemon, pokemonAtrapado);
 }

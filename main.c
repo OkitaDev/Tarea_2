@@ -7,7 +7,7 @@
 int main()
 {
     short opcion;
-    HashMap * mapa = createMap(25);
+    HashMap * mapa = createMap(24);
 
     do
     {
