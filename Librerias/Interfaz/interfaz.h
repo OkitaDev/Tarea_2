@@ -3,5 +3,6 @@
 
 void mostrarMenuPokedex();
 void mostrarSeleccion();
+short ingresarOpcion(short);
 
 #endif /* interfaz.h */

@@ -7,23 +7,21 @@
 int main()
 {
     short opcion;
-    HashMap * mapa = createMap(10);
+    HashMap * mapa = createMap(25);
 
     do
     {
         mostrarMenuPokedex();
-        fflush(stdin);
-        scanf("%hi", &opcion);
+        opcion = ingresarOpcion(0);
         if(opcion == 0) break;
 
         switch(opcion)
         {
             case 1:
                 mostrarSeleccion();
-                scanf("%hi", &opcion);
+                opcion = ingresarOpcion(1);
                 if(opcion == 1) importarArchivo(mapa);
                 else if(opcion == 2) exportarArchivo(mapa);
-                else printf("\nNo se hizo nada\n");
                 break;
             case 2:
                 atraparPokemon(mapa);
@@ -46,9 +44,6 @@ int main()
             case 9:
                 break;
             case 10:
-                break;
-            default:
-                printf("\nLa opcion que ha marcado no existe\n");
                 break;
         }
         printf("\n");

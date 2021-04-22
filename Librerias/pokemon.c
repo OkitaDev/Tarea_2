@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "TDA_Mapa/hashmap.h"
 
@@ -115,7 +116,7 @@ HashMap * importarArchivo(HashMap * mapa)
 
     if(archivo == NULL)
     {
-        printf("\nArchivo NO IMPLEMENTADO!\n");
+        printf("\nArchivo NO IMPORTADO!\n");
         return NULL;
     }
 
@@ -127,16 +128,18 @@ HashMap * importarArchivo(HashMap * mapa)
     {
         if(size(mapa) >= 100)
         {
-          printf("\nHa superado el maximo de Pokemons\n");
-          printf("Se ha podido algunos implementar pokemons!\n");
-          return mapa;
+            printf("\nHa superado el maximo de Pokemons\n");
+            printf("Se ha podido algunos implementar pokemons!\n");
+            return mapa;
         }
 
-        if(size(mapa) == capacity(mapa)) enlarge(mapa);
+        //If para aumentar el tamaño del mapa
+        if(size(mapa) == round(capacity(mapa) * 0.7)) enlarge(mapa);
+
         ingresarPokemon(mapa, lineaLeida);
     }
 
-    printf("\nArchivo IMPLEMENTADO!\n");
+    printf("\nArchivo IMPORTADO!\n");
     fclose(archivo);
     return mapa;
 }
@@ -164,6 +167,13 @@ HashMap * exportarArchivo(HashMap * mapa)
 
 void atraparPokemon(HashMap * mapa)
 {
+    if(size(mapa) > 100)
+    {
+        printf("\nHa superado el maximo de Pokemons\n");
+        printf("Se ha podido algunos implementar pokemons!\n");
+        return;
+    }
+    
     //Creacion de variable del pokemon atrapado
     tipoPokemon * pokemonAtrapado = malloc(sizeof(tipoPokemon));
 
