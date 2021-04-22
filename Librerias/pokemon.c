@@ -119,21 +119,21 @@ HashMap * importarArchivo(HashMap * mapa)
         return NULL;
     }
 
-    char lineaLeida[101];
-    fgets(lineaLeida, 100, archivo);
-
     //Lectura del archivo (saltandose la primera linea)
+    char lineaLeida[101];
+    short lecturaPrimeraLinea = 0;
+
     while(fgets(lineaLeida, 100, archivo))
     {
         if(size(mapa) >= 100)
         {
           printf("\nHa superado el maximo de Pokemons\n");
-          printf("Se ha podido algunos implementar pokemons!\n");
+          printf("Se han podido implementar %i pokemons!\n", lecturaPrimeraLinea - 1);
           return mapa;
         }
 
-        if(size(mapa) == capacity(mapa)) enlarge(mapa);
-        ingresarPokemon(mapa, lineaLeida);
+        if(lecturaPrimeraLinea != 0) ingresarPokemon(mapa, lineaLeida);
+        lecturaPrimeraLinea++;
     }
 
     printf("\nArchivo IMPLEMENTADO!\n");

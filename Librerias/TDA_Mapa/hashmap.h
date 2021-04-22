@@ -19,5 +19,4 @@ void enlarge(HashMap * map);
 
 long size(HashMap * map);
 
-long capacity(HashMap * map);
 #endif /* HashMap_h */
