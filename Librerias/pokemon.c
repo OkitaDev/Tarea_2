@@ -213,6 +213,8 @@ void atraparPokemon(HashMap * mapa)
     printf("\nIngrese el nombre del Pokemon: ");
     fflush(stdin);
     scanf("%25[^\n]s", pokemonAtrapado->nombrePokemon);
+    //Revision de Ocurrencia
+    elPokemonYaExiste(mapa, pokemonAtrapado);
 
     //Ingreso de los tipos
     printf("\nIngrese el tipo(s) del Pokemon: ");
@@ -296,7 +298,7 @@ void buscarpokemonpornombrepokedex(HashMap * mapa)
     //Ingreso nombre de pokemón
     printf("Ingrese el pokemon a buscar: \n");
     fflush(stdin);
-     scanf("%25[^\n]s", nombrebuscado);
+    scanf("%25[^\n]s", nombrebuscado);
 
     //Se busca el pokemon y se ingresa en el auxiliar
     pokemon=searchMap(mapa,nombrebuscado);
@@ -304,9 +306,10 @@ void buscarpokemonpornombrepokedex(HashMap * mapa)
     //De no ser el auxiliar NULL, se imprimen sus datos por pantalla
     if(pokemon!=NULL)
     {
-        printf("\n%s Cantidad: %i\n", pokemon->nombrePokemon, pokemon->ident.ocurrencia);
+        printf("\n%s Sexo: %s\n", pokemon->nombrePokemon, pokemon->sexo);
         printf("Tipo(s): %s\n", pokemon->tipos);
-
+        printf("ID: %i Pokedex: %i\n", pokemon->ident.id, pokemon->ident.idPokedex);
+        printf("PS: %i PC: %i\n", pokemon->puntos.pSalud, pokemon->puntos.pCombate);
     }else
     {
         printf("No se encuentra el pokemon ingresado.\n");
