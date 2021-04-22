@@ -43,6 +43,7 @@
 *.pdb
 
 *.pdf
+*.csv
 
 # Kernel Module Compile Results
 *.mod*
