@@ -7,7 +7,7 @@
 int main()
 {
     short opcion;
-    HashMap * mapa = createMap(100);
+    HashMap * mapa = createMap(10);
 
     do
     {
@@ -34,7 +34,7 @@ int main()
                 break;
             case 5:
                 if(size(mapa) != 0) buscarPokemonNombre(mapa);
-                else printf("\nNo ha atrapado algun Pokemon\n");
+                else printf("\nNo ha atrapado a ningun Pokemon\n");
                 break;
             case 6:
                 break;
