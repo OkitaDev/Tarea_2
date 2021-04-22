@@ -273,6 +273,16 @@ void atraparPokemon(HashMap * mapa)
     insertMap(mapa, pokemonAtrapado->nombrePokemon, pokemonAtrapado);
 }
 
+void evolucionarPokemon(HashMap * mapa)
+{
+
+}
+
+void busquedaPorTipo(HashMap * mapa)
+{
+
+}
+
 void buscarPokemonNombre(HashMap * mapa)
 {
     char nombreBuscado[25];
@@ -330,3 +340,23 @@ void buscarpokemonpornombrepokedex(HashMap * mapa)
         printf("No se encuentra el pokemon ingresado.\n");
     }
  }
+
+void mostrarPokedex(HashMap * mapa)
+{
+  
+}
+
+void mostrarPokemonsOrdenadosPC(HashMap * mapa)
+{
+
+}
+
+void liberarPokemon(HashMap * mapa)
+{
+
+ }
+
+void mostrarPokemonRegion(HashMap * mapa)
+{
+
+}

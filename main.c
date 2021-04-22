@@ -27,23 +27,30 @@ int main()
                 atraparPokemon(mapa);
                 break;
             case 3:
+                evolucionarPokemon(mapa);
                 break;
             case 4:
+                busquedaPorTipo(mapa);
                 break;
             case 5:
                 if(size(mapa) != 0) buscarPokemonNombre(mapa);
                 else printf("\nNo ha atrapado a ningun Pokemon\n");
                 break;
             case 6:
-                buscarpokemonpornombrepokedex(mapa);
+                if(size(mapa) != 0)buscarpokemonpornombrepokedex(mapa);
+                else prinitf("\nNo ha atrapado a ningun Pokemon\n");
                 break;
             case 7:
+                mostrarPokedex(mapa);
                 break;
             case 8:
+                mostrarPokemonsOrdenadosPC(mapa);
                 break;
             case 9:
+                liberarPokemon(mapa);
                 break;
             case 10:
+                mostrarPokemonsOrdenadosPC(mapa);
                 break;
         }
         printf("\n");
