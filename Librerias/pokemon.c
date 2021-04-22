@@ -148,16 +148,33 @@ HashMap * exportarArchivo(HashMap * mapa)
 {
     char nombreArchivo[40];
 
+    //Lectura del nombre del archivo
     printf("\nIngrese el nombre del nuevo archivo (Incluyendo el .csv)\n\n");
     fflush(stdin);
     scanf("%39[^\n]s", nombreArchivo);
 
+    //Acceso al archivo
     FILE * archivo = fopen(nombreArchivo, "w");
-
     if(archivo == NULL)
     {
         printf("\nArchivo NO EXPORTADO!\n");
         return NULL;
+    }
+
+    //Lectura de la primera linea
+    fprintf(archivo, "id,nombre,tipos,pc,ps,sexo,evolucion previa,evolucion posterior,numero pokedex,region\n");
+
+    //Lectura de los Pokemons almacenados
+    tipoPokemon * auxPokemon = firstMap(mapa);
+
+    while(auxPokemon != NULL)
+    {
+      fprintf(archivo, "%i,%s", auxPokemon->ident.id, auxPokemon->nombrePokemon);
+      fprintf(archivo, ",%s,%i",auxPokemon->tipos, auxPokemon->puntos.pCombate);
+      fprintf(archivo, ",%i,%s", auxPokemon->puntos.pSalud, auxPokemon->sexo);
+      fprintf(archivo, ",%s,%s",auxPokemon->evol.evolPrevia, auxPokemon->evol.evolSiguiente);
+      fprintf(archivo, ",%i,%s", auxPokemon->ident.idPokedex, auxPokemon->region);
+      auxPokemon = nextMap(mapa);
     }
 
     printf("\nArchivo EXPORTADO!\n");
@@ -173,7 +190,7 @@ void atraparPokemon(HashMap * mapa)
         printf("Se ha podido algunos implementar pokemons!\n");
         return;
     }
-    
+
     //Creacion de variable del pokemon atrapado
     tipoPokemon * pokemonAtrapado = malloc(sizeof(tipoPokemon));
 
