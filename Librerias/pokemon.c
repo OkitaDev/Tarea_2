@@ -35,6 +35,20 @@ typedef struct tipoPokemon
     tipoIdentificacion ident;
 }tipoPokemon;
 
+void elPokemonYaExiste(HashMap * mapa, tipoPokemon * pokemon)
+{
+  tipoPokemon * aux = searchMap(mapa, pokemon->nombrePokemon);
+  if(aux != NULL)
+  {
+    aux->ident.ocurrencia += 1;
+    pokemon->ident.ocurrencia += aux->ident.ocurrencia;
+  }
+  else
+  {
+    pokemon->ident.ocurrencia = 1;
+  }
+}
+
 void ingresarPokemon(HashMap * mapa, char * lineaLeida)
 {
     tipoPokemon * nuevoPokemon = (tipoPokemon *) malloc (sizeof(tipoPokemon));
@@ -47,6 +61,7 @@ void ingresarPokemon(HashMap * mapa, char * lineaLeida)
     //Lectura del nombre
     fragmento = strtok(NULL, ",");
     strcpy(nuevoPokemon->nombrePokemon, fragmento);
+    elPokemonYaExiste(mapa, nuevoPokemon);
 
     //Lectura de los tipos
     fragmento = strtok(NULL, ",");
@@ -289,10 +304,8 @@ void buscarpokemonpornombrepokedex(HashMap * mapa)
     //De no ser el auxiliar NULL, se imprimen sus datos por pantalla
     if(pokemon!=NULL)
     {
-        printf("\n%s Sexo: %s\n", pokemon->nombrePokemon, pokemon->sexo);
+        printf("\n%s Cantidad: %i\n", pokemon->nombrePokemon, pokemon->ident.ocurrencia);
         printf("Tipo(s): %s\n", pokemon->tipos);
-        printf("ID: %i Pokedex: %i\n", pokemon->ident.id, pokemon->ident.idPokedex);
-        printf("PS: %i PC: %i\n", pokemon->puntos.pSalud, pokemon->puntos.pCombate);
 
     }else
     {
