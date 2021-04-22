@@ -245,3 +245,30 @@ void buscarPokemonNombre(HashMap * mapa)
     if(existePokemon == 0) printf("\nNo ha atrapado %s\n", nombreBuscado);
 
 }
+
+void buscarpokemonpornombrepokedex(HashMap * mapa)
+{
+    char nombrebuscado[25];
+    tipoPokemon * pokemon;
+
+    //Ingreso nombre de pokemón
+    printf("Ingrese el pokemon a buscar: \n");
+    fflush(stdin);
+     scanf("%25[^\n]s", nombrebuscado);
+
+    //Se busca el pokemon y se ingresa en el auxiliar
+    pokemon=searchMap(mapa,nombrebuscado);
+
+    //De no ser el auxiliar NULL, se imprimen sus datos por pantalla
+    if(pokemon!=NULL)
+    {
+        printf("\n%s Sexo: %s\n", pokemon->nombrePokemon, pokemon->sexo);
+        printf("Tipo(s): %s\n", pokemon->tipos);
+        printf("ID: %i Pokedex: %i\n", pokemon->ident.id, pokemon->ident.idPokedex);
+        printf("PS: %i PC: %i\n", pokemon->puntos.pSalud, pokemon->puntos.pCombate);
+
+    }else
+    {
+        printf("No se encuentra el pokemon ingresado.\n");
+    }
+ }

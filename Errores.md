@@ -1,3 +1,4 @@
 - Funcion buscarPokemon, revisar si hay otra forma de hacerla
 - Funcion atraparPokemon y importarArchivo, indicar que pasa si hay mas de un pokemon con el mismo nombre o id
 - Funcion Hash, revisar como usar key de int
+- General, luego de escoger una opción, si se ingresa una letra al azar, se ejecutará denuevo la misma opción

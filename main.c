@@ -37,6 +37,7 @@ int main()
                 else printf("\nNo ha atrapado algun Pokemon\n");
                 break;
             case 6:
+                buscarpokemonpornombrepokedex(mapa);
                 break;
             case 7:
                 break;
