@@ -35,18 +35,29 @@ typedef struct tipoPokemon
     tipoIdentificacion ident;
 }tipoPokemon;
 
-void elPokemonYaExiste(HashMap * mapa, tipoPokemon * pokemon)
+short elPokemonYaExiste(HashMap * mapa, tipoPokemon * pokemon)
 {
   tipoPokemon * aux = searchMap(mapa, pokemon->nombrePokemon);
   if(aux != NULL)
   {
-    aux->ident.ocurrencia += 1;
-    pokemon->ident.ocurrencia += aux->ident.ocurrencia;
+    if(pokemon->ident.idPokedex == aux->ident.idPokedex)
+    {
+      aux->ident.ocurrencia += 1;
+      pokemon->ident.ocurrencia += aux->ident.ocurrencia;
+    }
+    else
+    {
+      printf("\nEl numero de la Pokedex es erroneo\n");
+      printf("El pokemon %s con ID %i no sera ingresado\n", pokemon->nombrePokemon, pokemon->ident.id);
+      return 1;
+    }
   }
   else
   {
     pokemon->ident.ocurrencia = 1;
   }
+
+  return 0;
 }
 
 void ingresarPokemon(HashMap * mapa, char * lineaLeida)
@@ -61,7 +72,6 @@ void ingresarPokemon(HashMap * mapa, char * lineaLeida)
     //Lectura del nombre
     fragmento = strtok(NULL, ",");
     strcpy(nuevoPokemon->nombrePokemon, fragmento);
-    elPokemonYaExiste(mapa, nuevoPokemon);
 
     //Lectura de los tipos
     fragmento = strtok(NULL, ",");
@@ -109,6 +119,9 @@ void ingresarPokemon(HashMap * mapa, char * lineaLeida)
     //Lectura del numero de la Pokedex
     fragmento = strtok(NULL, ",");
     nuevoPokemon->ident.idPokedex = strtol(fragmento, NULL, 10);
+
+    //Aumentar la cantidad de veces que posee un Pokemon y si el nro de Pokedex del Pokemon es el mismo
+    if(elPokemonYaExiste(mapa, nuevoPokemon) == 1) return;
 
     //Lectura de la Region
     fragmento = strtok(NULL,",");
@@ -213,8 +226,14 @@ void atraparPokemon(HashMap * mapa)
     printf("\nIngrese el nombre del Pokemon: ");
     fflush(stdin);
     scanf("%25[^\n]s", pokemonAtrapado->nombrePokemon);
+
+    //Ingreso del numero de la Pokedex
+    printf("\nIngrese el numero de ubicacion de la Pokedex: ");
+    fflush(stdin);
+    scanf("%i", &pokemonAtrapado->ident.idPokedex);
+
     //Revision de Ocurrencia
-    elPokemonYaExiste(mapa, pokemonAtrapado);
+    if(elPokemonYaExiste(mapa, pokemonAtrapado) == 1) return;
 
     //Ingreso de los tipos
     printf("\nIngrese el tipo(s) del Pokemon: ");
@@ -244,10 +263,6 @@ void atraparPokemon(HashMap * mapa)
     fflush(stdin);
     scanf("%25[^\n]s", pokemonAtrapado->evol.evolSiguiente);
 
-    //Ingreso del numero de la Pokedex
-    printf("\nIngrese el numero de ubicacion de la Pokedex: ");
-    fflush(stdin);
-    scanf("%i", &pokemonAtrapado->ident.idPokedex);
 
     //Ingreso de la region del Pokemon
     printf("\nIngrese la region originaria del Pokemon: ");
