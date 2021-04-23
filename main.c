@@ -38,7 +38,7 @@ int main()
                 break;
             case 6:
                 if(size(mapa) != 0)buscarpokemonpornombrepokedex(mapa);
-                else prinitf("\nNo ha atrapado a ningun Pokemon\n");
+                else printf("\nNo ha atrapado a ningun Pokemon\n");
                 break;
             case 7:
                 mostrarPokedex(mapa);

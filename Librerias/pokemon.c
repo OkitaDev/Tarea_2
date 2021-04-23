@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+#include <ctype.h>
 
 #include "TDA_Mapa/hashmap.h"
 
@@ -321,9 +322,10 @@ void buscarpokemonpornombrepokedex(HashMap * mapa)
     tipoPokemon * pokemon;
 
     //Ingreso nombre de pokemón
-    printf("Ingrese el pokemon a buscar: \n");
+    printf("\nIngrese el pokemon a buscar: \n\n");
     fflush(stdin);
     scanf("%25[^\n]s", nombrebuscado);
+    nombrebuscado[0]=(toupper(nombrebuscado[0]));
 
     //Se busca el pokemon y se ingresa en el auxiliar
     pokemon=searchMap(mapa,nombrebuscado);
@@ -334,7 +336,6 @@ void buscarpokemonpornombrepokedex(HashMap * mapa)
         printf("\n%s Sexo: %s\n", pokemon->nombrePokemon, pokemon->sexo);
         printf("Tipo(s): %s\n", pokemon->tipos);
         printf("ID: %i Pokedex: %i\n", pokemon->ident.id, pokemon->ident.idPokedex);
-        printf("PS: %i PC: %i\n", pokemon->puntos.pSalud, pokemon->puntos.pCombate);
     }else
     {
         printf("No se encuentra el pokemon ingresado.\n");
