@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <ctype.h>
 
 void mostrarMenuPokedex()
@@ -52,12 +53,14 @@ short ingresarOpcion(short pregunta)
 
 }
 
-char * convertirEstandar(char * cadena)
+void convertirEstandar(char * cadena)
 {
-  cadena[0] = toupper(cadena[0]);
-	//Va caracter por caracter pasandolo a minuscula
-  for(int i = 1; cadena[i] != '\0' ; i++)
-    cadena[i] = tolower(cadena[i]);
+    cadena[0] = toupper(cadena[0]);
+	
+    //Va caracter por caracter pasandolo a minuscula
+    for(int i = 1; cadena[i] != '\0' ; i++)
+        cadena[i] = tolower(cadena[i]);
 
-  return cadena;
+    int largo = strlen(cadena) - 1;
+    if(cadena[largo] == ' ') cadena[largo] = '\0';
 }
