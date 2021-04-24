@@ -385,6 +385,7 @@ void buscarpokemonpornombrepokedex(HashMap * mapa)
 		printf("\n%s Sexo: %s\n", pokemon->nombrePokemon, pokemon->sexo);
 		printf("Tipo(s): %s\n", pokemon->tipos);
 		printf("ID: %i Pokedex: %i\n", pokemon->ident.id, pokemon->ident.idPokedex);
+		printf("Region: %s",pokemon->region);
 	}
 	else
 	{
@@ -394,7 +395,54 @@ void buscarpokemonpornombrepokedex(HashMap * mapa)
 
 void mostrarPokedex(HashMap * mapa)
 {
+	tipoPokemon * pokemon;
+	pokemon=firstMap(mapa);
+	int i=1,ultimo=0;
+	tipoPokemon * menor;
+	tipoPokemon * mayor;
+	menor=(tipoPokemon*)calloc(1,sizeof(tipoPokemon));
+	mayor=(tipoPokemon*)calloc(1,sizeof(tipoPokemon));
+	mayor->ident.idPokedex=0;
+	menor->ident.idPokedex=0;
+	if(pokemon==NULL)
+	{
+		printf("Aún no se ha ingresado el .csv");
+	}else
+	{
+		do
+	    {
+			if(pokemon->ident.idPokedex>mayor->ident.idPokedex){
+				mayor=pokemon;
+			}
+			i++;
+		    pokemon=nextMap(mapa);
 
+	    }while(pokemon!=NULL);
+		
+		do
+		{
+			pokemon=firstMap(mapa);
+			menor=mayor;
+			do	
+			{
+				if(pokemon->ident.idPokedex<=menor->ident.idPokedex && pokemon->ident.idPokedex>ultimo)
+				{
+					menor=pokemon;
+				}
+				pokemon=nextMap(mapa);
+
+			}while(pokemon!=NULL);
+			ultimo=menor->ident.idPokedex;
+
+		
+			printf("\n%d)%s\n",menor->ident.idPokedex, menor->nombrePokemon);
+		    printf("Tipo(s): %s\n", menor->tipos);
+			printf("Evolucion Previa: %s\n",menor->evol.evolPrevia);
+			printf("Evolucion siguiente: %s\n",menor->evol.evolSiguiente);
+			printf("Cantidad en posesion: %d\n",menor->ident.ocurrencia);
+
+		}while(menor!=mayor);
+	}
 }
 
 void mostrarPokemonsOrdenadosPC(HashMap * mapa)
