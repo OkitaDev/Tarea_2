@@ -7,7 +7,8 @@
 int main()
 {
     short opcion;
-    HashMap * mapa = createMap(24);
+    HashMap * mapaNombre = createMap(24);
+    HashMap * mapaID = createMap(24);
 
     do
     {
@@ -20,37 +21,38 @@ int main()
             case 1:
                 mostrarSeleccion();
                 opcion = ingresarOpcion(1);
-                if(opcion == 1) importarArchivo(mapa);
-                else if(opcion == 2) exportarArchivo(mapa);
+                if(opcion == 1) importarArchivo(mapaNombre, mapaID);
+                else if(opcion == 2) exportarArchivo(mapaID);
                 break;
             case 2:
-                atraparPokemon(mapa);
+                if(size(mapaNombre) + 1 < 100)atraparPokemon(mapaNombre, mapaID);
+                else printf("\nHa superado el maximo de Pokemons!\n");
                 break;
             case 3:
-                evolucionarPokemon(mapa);
+                evolucionarPokemon(mapaNombre);
                 break;
             case 4:
-                busquedaPorTipo(mapa);
+                busquedaPorTipo(mapaNombre);
                 break;
             case 5:
-                if(size(mapa) != 0) buscarPokemonNombre(mapa);
+                if(size(mapaNombre) != 0) buscarPokemonNombre(mapaNombre);
                 else printf("\nNo ha atrapado a ningun Pokemon\n");
                 break;
             case 6:
-                if(size(mapa) != 0)buscarpokemonpornombrepokedex(mapa);
+                if(size(mapaNombre) != 0)buscarpokemonpornombrepokedex(mapaNombre);
                 else printf("\nPokemon no encontrado\n");
                 break;
             case 7:
-                mostrarPokedex(mapa);
+                mostrarPokedex(mapaNombre);
                 break;
             case 8:
-                mostrarPokemonsOrdenadosPC(mapa);
+                mostrarPokemonsOrdenadosPC(mapaNombre);
                 break;
             case 9:
-                liberarPokemon(mapa);
+                liberarPokemon(mapaNombre);
                 break;
             case 10:
-                mostrarPokemonsOrdenadosPC(mapa);
+                mostrarPokemonsOrdenadosPC(mapaNombre);
                 break;
         }
         printf("\n");

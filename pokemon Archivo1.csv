@@ -54,15 +54,14 @@ id,nombre,tipos,pc,ps,sexo,evolucion previa,evolucion posterior,numero pokedex,r
 53,Suicune,Agua,1553,125,No tiene,No tiene,No tiene,245,Johto
 54,Entei,Fuego,1898,145,No tiene,No tiene,No tiene,244,Johto
 55,Raikou,Electrico,1913,116,No tiene,No tiene,No tiene,243,Johto
-56,Ho-Oh,"Fuego, Volador",2213,132,No tiene,No tiene,No tiene,250,Johto
+56,Ho-oh,"Fuego, Volador",2213,132,No tiene,No tiene,No tiene,250,Johto
 57,Mew,Psiquico,1301,111,No tiene,No tiene,No tiene,151,Kanto
 58,Gengar,"Veneno, Fantasma",2878,134,No tiene,Gastly,No tiene,94,Kanto
 59,Gengar,"Veneno, Fantasma",2878,134,Macho,Haunter,No tiene,94,Kanto
-60,Charmander ,Fuego,525,67,Macho,Charmeleon ,Charizard ,7,Kanto
 61,Sableye,"Fantasma, Siniestro",1461,119,Hembra,No tiene,No tiene,302,Hoenn
 62,Charizard,"Fuego, Volador",2586,149,Macho,Charmeleon,No tiene,6,Kanto
 63,Lucario,"Lucha, Acero",2206,132,Macho,Riolu ,No tiene,448,Sinnoh
-64,Snorlax,"Normal, Fuego, Agua, Planta",3535,180,Macho,No tiene,No tiene,143,Kanto
+64,Snorlax,"Normal, fuego, agua, Planta",3535,180,Macho,No tiene,No tiene,143,Kanto
 65,Gengar,"Veneno, Fantasma",2878,134,Hembra,Hunter,No tiene,94,Kanto
 66,Umbreon,Siniestro,1552,144,Hembra,Eevee,No tiene,197,Johto
 67,Charizard,"Fuego, Volador",2700,280,Macho,Charmeleon,No tiene,6,Kanto
@@ -83,14 +82,20 @@ id,nombre,tipos,pc,ps,sexo,evolucion previa,evolucion posterior,numero pokedex,r
 82,Charjabug,"Electrico, Bicho",1667,124,Macho,Grubbin,Vikavolt,737,Alola
 83,Polteageist,Fantasma,1775,121,Hembra,Sinistea,No tiene,855,Galar
 84,Aerodactyl,"Volador, Roca",2304,207,Macho,No tiene,No tiene,142,Kanto
-85,Arctozolt,"Electrico, Hielo",1794,128,No tiene,No tiene,No tiene,881,Galar
-86,Toxtricity,"Electrico, Veneno",1993,132,Hembra,Toxel,No tiene,849,Galar
-87,Dartrix,"Planta, Volador",1402,129,Macho,Rowlet,Decidueye,723,Alola
-88,Cursola,Fantasma,1573,143,Hembra,Corsola de galar,No tiene,864,Galar
-89,Thwackey,Planta,1557,123,Macho,Grookey,Rillaboom,811,Galar
-90,Torracat,Fuego,1576,124,Macho,Litten,Incineroar,726,Alola
-91,Lapras,"Agua, Hielo",1492,174,Hembra,No tiene,No tiene,131,Kanto
-92,Sableye,"Fantasma, Siniestro",1461,119,Hembra,No tiene,No tiene,302,Hoenn
-93,Jolteon,Electrico,2888,140,Macho,Eevee,No tiene,135,Kanto
-94,Chikorita,Planta,0,1,Hembra,No tiene,Baylef,101,Johto
-95,Torterra,"Planta, Tierra",2062,151,Macho,Grotle,No tiene,389,Sinnoh
+1,Arctozolt,"Electrico, Hielo",1794,128,No tiene,No tiene,No tiene,881,Galar
+1,Toxtricity,"Electrico, Veneno",1993,132,Hembra,Toxel,No tiene,849,Galar
+1,Dartrix,"Planta, Volador",1402,129,Macho,Rowlet,Decidueye,723,Alola
+1,Cursola,Fantasma,1573,143,Hembra,Corsola de galar,No tiene,864,Galar
+80,Thwackey,Planta,1557,123,Macho,Grookey,Rillaboom,811,Galar
+1,Torracat,Fuego,1576,124,Macho,Litten,Incineroar,726,Alola
+1,Lapras,"Agua, Hielo",1492,174,Hembra,No tiene,No tiene,131,Kanto
+1,Sableye,"Fantasma, Siniestro",1461,119,Hembra,No tiene,No tiene,302,Hoenn
+92,Jolteon,Electrico,2888,140,Macho,Eevee,No tiene,135,Kanto
+1,Chikorita,Planta,0,1,Hembra,No tiene,Baylef,101,Johto
+1,Torterra,"Planta, Tierra",2062,151,Macho,Grotle,No tiene,389,Sinnoh
+1,Clamperl,Agua,523,63,Hembra,No tiene,Huntail,366,Hoenn
+1,Cyndaquil,Fuego,520,77,Macho,No tiene,Quilava,155,Johto
+1,Gastly,"Veneno, Fantasma",504,59,Hembra,No tiene,Haunter,92,Kanto
+1,Aegislash,"Fantasma, Acero",0,324,Macho,Double,No tiene,681,Kalos
+1,Vaporeon,Agua,2551,210,Macho,Eevee,No tiene,134,Kanto
+1,Vulpix,Fuego,642,92,Hembra,No tiene,Ninetales,37,Kanto
