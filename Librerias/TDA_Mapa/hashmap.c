@@ -11,7 +11,7 @@ int enlarge_called=0;
 
 struct Pair
 {
-    char * key;
+    void * key;
     void * value;
 };
 
@@ -23,7 +23,7 @@ struct HashMap
     long current; //indice del ultimo dato accedido
 };
 
-Pair * createPair(char * key,  void * value)
+Pair * createPair(void * key,  void * value)
 {
     Pair * new = (Pair *)malloc(sizeof(Pair));
     new->key = key;
@@ -31,7 +31,7 @@ Pair * createPair(char * key,  void * value)
     return new;
 }
 
-long hash( char * key, long capacity)
+long hashCaracter( char * key, long capacity)
 {
     unsigned long hash = 0;
     char * ptr;
@@ -41,17 +41,34 @@ long hash( char * key, long capacity)
     }
     return hash%capacity;
 }
+long hashEntero( void * key, long capacity)
+{
+    return ((unsigned long )key)%capacity;
+}
 
-int is_equal(void* key1, void* key2)
+int is_equal_caracter(void* key1, void* key2)
 {
     if(key1 == NULL || key2 == NULL) return 0;
     if(strcmp((char*)key1,(char*)key2) == 0) return 1;
     return 0;
 }
-
-void insertMap(HashMap * map, char * key, void * value)
+int is_equal_entero(void* key1, void* key2)
 {
-	long indice = hash(key, map->capacity);
+    if(key1 == NULL || key2 == NULL) return 0;
+    if(key1 == key2) return 1;
+    return 0;
+}
+
+
+void insertMap(HashMap * map, void * key, void * value)
+{
+	long indice;
+	if( (unsigned long)key < 1000 ){
+		indice = hashEntero(key, map->capacity);
+	}else{
+		indice = hashCaracter(key, map->capacity);
+	}
+	
 
 	while(map->buckets[indice] != NULL && map->buckets[indice]->key != 0)
 	{
@@ -95,36 +112,74 @@ HashMap * createMap(long capacity)
 	return map;
 }
 
-void eraseMap(HashMap * map,  char * key)
+void eraseMap(HashMap * map,  void * key)
 {
-	long indice = hash(key, map->capacity);
+	long indice;
+	if( (unsigned long)key < 1000 ){
+		indice = hashEntero(key, map->capacity);
 
-	while(map->buckets[indice] != NULL)
-	{
-		if(is_equal(key, map->buckets[indice]->key))
+		while(map->buckets[indice] != NULL)
 		{
-			map->buckets[indice]->key = NULL;
-			map->size--;
-			return;
+			if(is_equal_entero(key, map->buckets[indice]->key))
+			{
+				map->buckets[indice]->key = NULL;
+				map->size--;
+				return;
+			}
+			indice++;
+			indice %= map->capacity;
 		}
-		indice++;
-		indice %= map->capacity;
+	}else{
+		indice = hashCaracter(key, map->capacity);
+
+		while(map->buckets[indice] != NULL)
+		{
+			if(is_equal_caracter(key, map->buckets[indice]->key))
+			{
+				map->buckets[indice]->key = NULL;
+				map->size--;
+				return;
+			}
+			indice++;
+			indice %= map->capacity;
+		}
 	}
+
+	
 }
 
-void * searchMap(HashMap * map,  char * key) {
-	long indice = hash(key, map->capacity);
+void * searchMap(HashMap * map,  void * key) {
+	long indice;
+	if( (unsigned long)key < 1000 ){
+		indice = hashEntero(key, map->capacity);
 
-	while(map->buckets[indice] != NULL)
-	{
-		if(is_equal(map->buckets[indice]->key, key))
+		while(map->buckets[indice] != NULL)
 		{
-			map->current = indice;
-			return map->buckets[indice]->value;
+			if(is_equal_entero(map->buckets[indice]->key, key))
+			{
+				map->current = indice;
+				return map->buckets[indice]->value;
+			}
+			indice++;
+			indice %= map->capacity;
 		}
-		indice++;
-		indice %= map->capacity;
+
+	}else{
+		indice = hashCaracter(key, map->capacity);
+
+		while(map->buckets[indice] != NULL)
+		{
+			if(is_equal_caracter(map->buckets[indice]->key, key))
+			{
+				map->current = indice;
+				return map->buckets[indice]->value;
+			}
+			indice++;
+			indice %= map->capacity;
+		}
 	}
+
+	
 
   return NULL;
 }

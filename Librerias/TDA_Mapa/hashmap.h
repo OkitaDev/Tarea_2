@@ -5,11 +5,11 @@ typedef struct HashMap HashMap;
 
 HashMap * createMap(long capacity);
 
-void insertMap(HashMap * table, char * key, void * value);
+void insertMap(HashMap * table, void * key, void * value);
 
-void eraseMap(HashMap * table, char * key);
+void eraseMap(HashMap * table, void * key);
 
-void * searchMap(HashMap * table, char * key);
+void * searchMap(HashMap * table, void * key);
 
 void * firstMap(HashMap * table);
 
