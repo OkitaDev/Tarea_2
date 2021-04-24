@@ -59,7 +59,7 @@ id,nombre,tipos,pc,ps,sexo,evolucion previa,evolucion posterior,numero pokedex,r
 58,Gengar,"Veneno, Fantasma",2878,134,No tiene,Gastly,No tiene,94,Kanto
 59,Gengar,"Veneno, Fantasma",2878,134,Macho,Haunter,No tiene,94,Kanto
 60,Charmander ,Fuego,525,67,Macho,Charmeleon ,Charizard ,7,Kanto
-61,Sableye ,"Fantasma, Siniestro",1461,119,Hembra,No tiene,No tiene,302,Hoenn
+61,Sableye,"Fantasma, Siniestro",1461,119,Hembra,No tiene,No tiene,302,Hoenn
 62,Charizard,"Fuego, Volador",2586,149,Macho,Charmeleon,No tiene,6,Kanto
 63,Lucario,"Lucha, Acero",2206,132,Macho,Riolu ,No tiene,448,Sinnoh
 64,Snorlax,"Normal, Fuego, Agua, Planta",3535,180,Macho,No tiene,No tiene,143,Kanto
@@ -90,7 +90,7 @@ id,nombre,tipos,pc,ps,sexo,evolucion previa,evolucion posterior,numero pokedex,r
 89,Thwackey,Planta,1557,123,Macho,Grookey,Rillaboom,811,Galar
 90,Torracat,Fuego,1576,124,Macho,Litten,Incineroar,726,Alola
 91,Lapras,"Agua, Hielo",1492,174,Hembra,No tiene,No tiene,131,Kanto
-92,Sableye ,"Fantasma, Siniestro",1461,119,Hembra,No tiene,No tiene,302,Hoenn
+92,Sableye,"Fantasma, Siniestro",1461,119,Hembra,No tiene,No tiene,302,Hoenn
 93,Jolteon,Electrico,2888,140,Macho,Eevee,No tiene,135,Kanto
 94,Chikorita,Planta,0,1,Hembra,No tiene,Baylef,101,Johto
 95,Torterra,"Planta, Tierra",2062,151,Macho,Grotle,No tiene,389,Sinnoh
