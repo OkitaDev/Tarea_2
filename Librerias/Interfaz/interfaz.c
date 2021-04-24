@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <ctype.h>
 
 void mostrarMenuPokedex()
 {
@@ -48,5 +49,15 @@ short ingresarOpcion(short pregunta)
             if(opcion < 1 || opcion > 2) printf("\nNo existe tal opcion\n");
         } while (opcion < 1 || opcion > 2);
     }
-    
+
+}
+
+char * convertirEstandar(char * cadena)
+{
+  cadena[0] = toupper(cadena[0]);
+	//Va caracter por caracter pasandolo a minuscula
+  for(int i = 1; cadena[i] != '\0' ; i++)
+    cadena[i] = tolower(cadena[i]);
+
+  return cadena;
 }
