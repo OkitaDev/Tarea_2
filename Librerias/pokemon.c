@@ -184,8 +184,13 @@ HashMap * importarArchivo(HashMap * mapa)
     return mapa;
 }
 
-HashMap * exportarArchivo(HashMap * mapa)
+void exportarArchivo(HashMap * mapa)
 {
+    if(size(mapa) == 0)
+    {
+      printf("\nNo ha atrapado Pokemons\n");
+      return;
+    }
     char nombreArchivo[40];
 
     //Lectura del nombre del archivo
@@ -198,7 +203,7 @@ HashMap * exportarArchivo(HashMap * mapa)
     if(archivo == NULL)
     {
         printf("\nArchivo NO EXPORTADO!\n");
-        return NULL;
+        return;
     }
 
     //Lectura de la primera linea
@@ -228,7 +233,6 @@ HashMap * exportarArchivo(HashMap * mapa)
 
     printf("\nArchivo EXPORTADO!\n");
     fclose(archivo);
-    return mapa;
 }
 
 void atraparPokemon(HashMap * mapa)
@@ -246,7 +250,7 @@ void atraparPokemon(HashMap * mapa)
     int i;
 
     //Ingreso del ID
-    pokemonAtrapado->ident.id = size + 1; 
+    pokemonAtrapado->ident.id = size(mapa) + 1;
 
     //Ingreso del nombre
     printf("\nIngrese el nombre del Pokemon: ");
@@ -266,10 +270,10 @@ void atraparPokemon(HashMap * mapa)
     {
       printf("\nIngrese el tipo %i del Pokemon (Ingrese no para parar): ", i + 1);
       fflush(stdin);
-      scanf("%49[^\n]s", tipo);
+      scanf("%49s", tipo);
       if(strcmp("No", convertirEstandar(tipo)) == 0) break;
+      strcat(tipo, " ");
       strcpy(pokemonAtrapado->tipos[i], tipo);
-      strcat(pokemonAtrapado->tipos[i], " ");
     }
 
     pokemonAtrapado->ident.cantidadTipos = i;

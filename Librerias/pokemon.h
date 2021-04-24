@@ -7,7 +7,7 @@ typedef struct tipoPokemon tipoPokemon;
 HashMap * importarArchivo(HashMap *);
 
 //Funcion para exportar un archivo.csv
-HashMap * exportarArchivo(HashMap *);
+void exportarArchivo(HashMap *);
 
 //Funcion para ingresar un pokemon al PC
 void atraparPokemon(HashMap *);
