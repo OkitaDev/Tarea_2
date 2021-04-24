@@ -38,6 +38,8 @@ typedef struct tipoPokemon
 	tipoNumericos ident;
 }tipoPokemon;
 
+/* Funcion para cambiar el ID de un pokemon, si este se
+encuentra repetido*/
 void idOcupado(HashMap * mapa, tipoPokemon * pokemon)
 {
 	tipoPokemon * aux = searchMap(mapa, (void *) pokemon->ident.id);
@@ -383,14 +385,15 @@ void buscarPokemonNombre(HashMap * mapa)
 	{
 		if(strcmp(pokemonAuxiliar->nombrePokemon, nombreBuscado) == 0)
 		{
-		printf("\n%s Sexo: %s\n", pokemonAuxiliar->nombrePokemon, pokemonAuxiliar->sexo);
-		printf("Tipo(s): ");
-		for(int i = 0; i < pokemonAuxiliar->ident.cantidadTipos; i++)
-			printf("%s", pokemonAuxiliar->tipos[i]);
+			printf("\n%s Sexo: %s\n", pokemonAuxiliar->nombrePokemon, pokemonAuxiliar->sexo);
+			printf("Tipo(s): ");
 
-		printf("\nID: %i Pokedex: %i\n", pokemonAuxiliar->ident.id, pokemonAuxiliar->ident.idPokedex);
-		printf("PS: %i PC: %i\n", pokemonAuxiliar->puntos.pSalud, pokemonAuxiliar->puntos.pCombate);
-		existePokemon = 1;
+			for(int i = 0; i < pokemonAuxiliar->ident.cantidadTipos; i++)
+				printf("%s", pokemonAuxiliar->tipos[i]);
+
+			printf("\nID: %i Pokedex: %i\n", pokemonAuxiliar->ident.id, pokemonAuxiliar->ident.idPokedex);
+			printf("PS: %i PC: %i\n", pokemonAuxiliar->puntos.pSalud, pokemonAuxiliar->puntos.pCombate);
+			existePokemon = 1;
 		}
 		pokemonAuxiliar = nextMap(mapa);
 	}
@@ -399,27 +402,29 @@ void buscarPokemonNombre(HashMap * mapa)
 	if(existePokemon == 0) printf("\nNo ha atrapado %s\n", nombreBuscado);
 }
 
-void buscarpokemonpornombrepokedex(HashMap * mapa)
+void buscarPokemonPokedex(HashMap * mapa)
 {
-	char nombrebuscado[25];
+	char nombreBuscado[25];
 	tipoPokemon * pokemon;
 
 	//Ingreso nombre de pokemón
 	printf("\nIngrese el pokemon a buscar: ");
 	fflush(stdin);
-	scanf("%25[^\n]s", nombrebuscado);
-	convertirEstandar(nombrebuscado);
+	scanf("%25[^\n]s", nombreBuscado);
+	convertirEstandar(nombreBuscado);
 
 	//Se busca el pokemon y se ingresa en el auxiliar
-	pokemon=searchMap(mapa,nombrebuscado);
+	pokemon = searchMap(mapa,nombreBuscado);
 
 	//De no ser el auxiliar NULL, se imprimen sus datos por pantalla
-	if(pokemon!=NULL)
+	if(pokemon != NULL)
 	{
-		printf("\nNombre: %s Numero Pokedex: %i\nTipo(s): ", pokemon->nombrePokemon, pokemon->ident.idPokedex);
+		printf("\nNombre: %s Numero Pokedex: %i\n", pokemon->nombrePokemon, pokemon->ident.idPokedex);
+		printf("Region: %sTipos: ", pokemon->region);
 		for(int i = 0; i < pokemon->ident.cantidadTipos; i++)
 			printf("%s", pokemon->tipos[i]);
 
+		printf("\nEvolucion Previa: %s Evolucion Siguiente: %s", pokemon->evol.evolPrevia,pokemon->evol.evolSiguiente);
 		printf("\nVeces Atrapado: %i\n", pokemon->ident.ocurrencia);
 	}
 	else
@@ -431,18 +436,21 @@ void buscarpokemonpornombrepokedex(HashMap * mapa)
 void mostrarPokedex(HashMap * mapa)
 {
 	tipoPokemon * pokemon;
-	pokemon=firstMap(mapa);
-	int i=1,ultimo=0;
+	pokemon = firstMap(mapa);
+	int i = 1, ultimo = 0;
 	tipoPokemon * menor;
 	tipoPokemon * mayor;
+	
 	menor=(tipoPokemon*)calloc(1,sizeof(tipoPokemon));
 	mayor=(tipoPokemon*)calloc(1,sizeof(tipoPokemon));
-	mayor->ident.idPokedex=0;
-	menor->ident.idPokedex=0;
-	if(pokemon==NULL)
+	mayor->ident.idPokedex = 0;
+	menor->ident.idPokedex = 0;
+	
+	if(pokemon == NULL)
 	{
 		printf("Aún no se ha ingresado el .csv");
-	}else
+	}
+	else
 	{
 		do
 	    {

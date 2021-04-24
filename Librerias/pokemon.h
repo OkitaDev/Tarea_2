@@ -23,7 +23,7 @@ void busquedaPorTipo(HashMap *);
 void buscarPokemonNombre(HashMap *);
 
 //Funcion para buscar por Nombre a la especie de 1 Pokemon
-void buscarpokemonpornombrepokedex(HashMap *);
+void buscarPokemonPokedex(HashMap *);
 
 //Funcion para mostrar toda la informacion que se posea en la Pokedex
 void mostrarPokedex(HashMap *);
