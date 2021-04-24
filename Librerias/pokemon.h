@@ -37,4 +37,5 @@ void liberarPokemon(HashMap *);
 
 //Mostrar todos los pokemons de una region
 void mostrarPokemonRegion(HashMap *);
+
 #endif /* pokemon.h */
