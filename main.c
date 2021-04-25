@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "Librerias/Interfaz/interfaz.h"
 #include "Librerias/TDA_Mapa/hashmap.h"
@@ -23,6 +24,7 @@ int main()
                 opcion = ingresarOpcion(1);
                 if(opcion == 1) importarArchivo(mapaNombre, mapaID);
                 else if(opcion == 2) exportarArchivo(mapaID);
+                else printf("\nNo hizo nada\n");
                 break;
             case 2:
                 if(size(mapaNombre) + 1 < 100)atraparPokemon(mapaNombre, mapaID);
@@ -43,7 +45,8 @@ int main()
                 else printf("\nPokemon no encontrado\n");
                 break;
             case 7:
-                mostrarPokedex(mapaNombre);
+                if(size(mapaNombre) != 0) mostrarPokedex(mapaNombre);
+                else printf("\nNo ha atrapado a ningun Pokemon\n");
                 break;
             case 8:
                 mostrarPokemonsOrdenadosPC(mapaNombre);
@@ -55,12 +58,17 @@ int main()
                 mostrarPokemonRegion(mapaNombre);
                 break;
         }
+        opcion = 1;
         printf("\n");
     } while (opcion != 0);
 
     printf("\n -----\n");
     printf("| FIN |\n");
     printf(" -----\n\n");
+
+    //Liberacion de memoria
+    free(mapaNombre);
+    free(mapaID);
 
     return 0;
 }

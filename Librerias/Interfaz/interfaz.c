@@ -25,6 +25,7 @@ void mostrarSeleccion()
 {
     printf("\n1. Importar archivo .csv\n");
     printf("2. Exportar archivo .csv\n");
+    printf("0. No hacer nada\n");
 }
 
 short ingresarOpcion(short pregunta)
@@ -35,7 +36,6 @@ short ingresarOpcion(short pregunta)
         do
         {
             printf("\nElija una opcion: ");
-            fflush(stdin);
             scanf("%hi", &opcion);
             if(opcion < 0 || opcion > 11) printf("\nNo existe tal opcion\n");
         } while (opcion < 0 || opcion > 11);
@@ -45,10 +45,9 @@ short ingresarOpcion(short pregunta)
         do
         {
             printf("\nElija una opcion: ");
-            fflush(stdin);
             scanf("%hi", &opcion);
-            if(opcion < 1 || opcion > 2) printf("\nNo existe tal opcion\n");
-        } while (opcion < 1 || opcion > 2);
+            if(opcion < 0 || opcion > 2) printf("\nNo existe tal opcion\n");
+        } while (opcion < 0 || opcion > 2);
     }
 
 }
@@ -56,7 +55,7 @@ short ingresarOpcion(short pregunta)
 void convertirEstandar(char * cadena)
 {
     cadena[0] = toupper(cadena[0]);
-	
+
     //Va caracter por caracter pasandolo a minuscula
     for(int i = 1; cadena[i] != '\0' ; i++)
         cadena[i] = tolower(cadena[i]);
