@@ -259,7 +259,6 @@ void exportarArchivo(HashMap * mapa)
 {
 	/* Si el mapa esta vacio
 	no se exportara nada*/
-	printf("\nEl tamaño del mapa es de %i\n", size(mapa));
 	if(size(mapa) == 0)
 	{
 		printf("\nNo ha atrapado ningun Pokemon\n");
@@ -288,7 +287,7 @@ void exportarArchivo(HashMap * mapa)
 	while(auxPokemon != NULL)
 	{
 		//Ingreso de ID y nombre
-		printf("%i,%s,\n", auxPokemon->ident.id, auxPokemon->nombrePokemon, 34);
+		fprintf(archivo,"%i,%s,", auxPokemon->ident.id, auxPokemon->nombrePokemon);
 
 		//Copia de tipos, dependiendo de si posee 1 o mas tipos, se colocan comillas
 		if(auxPokemon->ident.cantidadTipos != 1) fprintf(archivo, "%c", 34);
