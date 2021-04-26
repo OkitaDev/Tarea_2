@@ -14,7 +14,7 @@ void atraparPokemon(HashMap *, HashMap *);
 
 /*Funcion para evolucionar a 1 pokemon, buscandolo
 a través de su ID*/
-void evolucionarPokemon(HashMap *);
+void evolucionarPokemon(HashMap *, HashMap *);
 
 //Buscar todos los Pokemons que posean el mismo Tipo
 void busquedaPorTipo(HashMap *);

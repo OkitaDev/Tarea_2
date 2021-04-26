@@ -98,6 +98,7 @@ short elPokemonYaExiste(HashMap * mapa, tipoPokemon * pokemon)
 	{
 		//Si no ha sido capturado un pokemon de la especia, se indica que es el primero
 		pokemon->ident.ocurrencia = 1;
+		return 2;
 	}
 
 	return 0;
@@ -200,7 +201,7 @@ para poder ser leidas por ingresarPokemon()*/
 void importarArchivo(HashMap * mapaNombre, HashMap * mapaID)
 {
 	//Si hay mas de 100 pokemon, no hace nada
-	if(size(mapaNombre) + 1 >= 100)
+	if(size(mapaNombre) >= 100)
 	{
 		printf("\nHa superado el maximo de Pokemons!\n");
 		return;
@@ -258,6 +259,7 @@ void exportarArchivo(HashMap * mapa)
 {
 	/* Si el mapa esta vacio
 	no se exportara nada*/
+	printf("\nEl tamaño del mapa es de %i\n", size(mapa));
 	if(size(mapa) == 0)
 	{
 		printf("\nNo ha atrapado ningun Pokemon\n");
@@ -286,7 +288,7 @@ void exportarArchivo(HashMap * mapa)
 	while(auxPokemon != NULL)
 	{
 		//Ingreso de ID y nombre
-		fprintf(archivo, "%i,%s,", auxPokemon->ident.id, auxPokemon->nombrePokemon, 34);
+		printf("%i,%s,\n", auxPokemon->ident.id, auxPokemon->nombrePokemon, 34);
 
 		//Copia de tipos, dependiendo de si posee 1 o mas tipos, se colocan comillas
 		if(auxPokemon->ident.cantidadTipos != 1) fprintf(archivo, "%c", 34);
@@ -392,9 +394,57 @@ void atraparPokemon(HashMap * mapaNombre, HashMap * mapaID)
 	insertMap(mapaID, & pokemonAtrapado->ident.id, pokemonAtrapado);
 }
 
-void evolucionarPokemon(HashMap * mapa)
+void evolucionarPokemon(HashMap * mapaNombre, HashMap * mapaID)
 {
+	int id;
+	getchar();
+	printf("\nIngrese el ID del pokemon: ");
+	fscanf(stdin, "%i", &id);
+	tipoPokemon * aux = searchMap(mapaID, &id);
 
+	if(aux != NULL)
+	{
+		if(strcmp(aux->evol.evolSiguiente, "No tiene") == 0)
+		{
+			printf("\nEl pokemon %s no posee evolucion\n", aux->nombrePokemon);
+		}
+		else
+		{
+			printf("\nNombre: %s\n", aux->nombrePokemon);
+			printf("PC: %i PS: %i\n", aux->puntos.pCombate, aux->puntos.pSalud);
+			char nombreAux[25];
+			strcpy(nombreAux, aux->nombrePokemon);
+
+			strcpy(aux->nombrePokemon, aux->evol.evolSiguiente);
+			strcpy(aux->evol.evolPrevia, nombreAux);
+			aux->ident.idPokedex++;
+
+			//Formas de indicar la siguiente evolucion del pokemon
+			short existe = elPokemonYaExiste(mapaNombre, aux);
+			if(existe == 2)
+			{
+				printf("\nIngrese la siguiente evolucion: ");
+				getchar();
+				fscanf(stdin, "%24[^\n]s", aux->evol.evolSiguiente);
+			}
+			else
+			{
+				tipoPokemon * aux2 = searchMap(mapaNombre, aux->nombrePokemon);
+				strcpy(aux->evol.evolSiguiente, aux2->evol.evolSiguiente);
+			}
+
+			aux->puntos.pCombate = round(aux->puntos.pCombate * 1.50);
+			aux->puntos.pSalud = round(aux->puntos.pSalud * 1.25);
+
+			printf("\nNombre: %s\n", aux->nombrePokemon);
+			printf("PS: %i PC: %i\n", aux->puntos.pCombate, aux->puntos.pSalud);
+			printf("Anterior: %s/Siguiente: %s\n", aux->evol.evolPrevia, aux->evol.evolSiguiente);
+		}
+	}
+	else
+	{
+		printf("\nNo hay un pokemon asociado al ID %i\n", id);
+	}
 }
 
 void busquedaPorTipo(HashMap * mapa)

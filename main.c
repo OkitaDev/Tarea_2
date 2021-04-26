@@ -31,7 +31,7 @@ int main()
                 else printf("\nHa superado el maximo de Pokemons!\n");
                 break;
             case 3:
-                evolucionarPokemon(mapaID);
+                evolucionarPokemon(mapaNombre, mapaID);
                 break;
             case 4:
                 busquedaPorTipo(mapaNombre);

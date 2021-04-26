@@ -93,8 +93,6 @@ id,nombre,tipos,pc,ps,sexo,evolucion previa,evolucion posterior,numero pokedex,r
 87,Boldore,Roca,1567,150,Hembra,Roggenrola,Gigalith,525,Sinnoh
 88,Aerodactyl,"Volador, Roca",2304,207,Macho,No tiene,No tiene,142,Kanto
 89,Snorlax,"Normal, fuego, agua, Planta",3535,180,Macho,No tiene,No tiene,143,Kanto
-90,Dartrix,"Planta, Volador",1402,129,Macho,Rowlet,Decidueye,723,Alola
-123,Cyndaquil,Fuego,520,77,Macho,No tiene,Quilava,155,Johto
-98,Toxapex,"Agua, Veneno",1604,135,Hembra,Mareanie,No tiene,748,Alola
-99,Clamperl,Agua,523,63,Hembra,No tiene,Huntail,366,Hoenn
-100,Clamperl,Agua,523,63,Hembra,No tiene,Huntail,366,Hoenn
+122,Charizard,"Fuego ,Volador ",1023,901,Hembra,Charmeleon,No tiene,6,Kanto
+123,Gastly,"Fantasma ,Veneno ",90123,901,Hembra,No tiene,Haunter,92,Kanto
+97,Charizard,"F ,V ",1,90,1,1,1,6,1
