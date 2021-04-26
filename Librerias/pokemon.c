@@ -570,51 +570,65 @@ void buscarPokemonPokedex(HashMap * mapa)
 	}
 }
 
-/*
 void mostrarPokedex(HashMap * mapa)
 {
-	tipoPokemon * pokemon;
+	tipoPokedex * pokemon;
 	pokemon = firstMap(mapa);
-	int ultimo;
-	tipoPokemon * menor;
-	tipoPokemon * mayor;
-
-	menor=(tipoPokemon*)calloc(1,sizeof(tipoPokemon));
-	mayor=(tipoPokemon*)calloc(1,sizeof(tipoPokemon));
-	mayor->ident.idPokedex = 0;
-	menor->ident.idPokedex = 0;
-
+	int ultimo=0;
+	tipoPokedex * menor;
+	tipoPokedex * mayor;
+    ///Inicialización de punteros
+	menor=(tipoPokedex*)calloc(1,sizeof(tipoPokedex));
+	mayor=(tipoPokedex*)calloc(1,sizeof(tipoPokedex));
+	mayor->idents.idPokedex = 0;
+	menor->idents.idPokedex = 0;
+    //Se busca el pokemon con mayor nid de pokedex y se almacena en mayor
 	do
 	{
-		if(pokemon->ident.idPokedex > mayor->ident.idPokedex) mayor = pokemon;
+		if(pokemon->idents.idPokedex > mayor->idents.idPokedex) mayor = pokemon;
 		pokemon = nextMap(mapa);
 
 	}while(pokemon != NULL);
-
+    //Se inicia el ciclo donde se imprimiran y compararan los nodos y su contenido, este, siempre y cuando los parametros
+	//'menor' y 'mayor' sean distintos
 	do
 	{
 		pokemon=firstMap(mapa);
 		menor = mayor;
+		///Recorre el arreglo para buscar que id de pokedex es la menor dentro del parametro de ser menor que el mayor numero y
+		///mayor que el último numero encontrado,
 		do
 		{
-			if(pokemon->ident.idPokedex <= menor->ident.idPokedex && pokemon->ident.idPokedex > ultimo)
-				menor = pokemon;
+			if(pokemon->idents.idPokedex <= menor->idents.idPokedex && pokemon->idents.idPokedex > ultimo) menor = pokemon;
 
 			pokemon = nextMap(mapa);
 
 		}while(pokemon!=NULL);
 
-		ultimo = menor->ident.idPokedex;
+		ultimo = menor->idents.idPokedex;
 
-		printf("\n%d)%s\n",menor->ident.idPokedex, menor->nombrePokemon);
-		printf("Tipo(s): %s\n", menor->tipos);
-		printf("Evolucion Previa: %s ",menor->evol.evolPrevia);
+        //Se imprime el pokemon que cumple las condiciones anteriormente solicitadas
+		printf("\n%d)%s\n",menor->idents.idPokedex, menor->nombrePokemon);
+		printf("Tipo(s): ");
+		for (int i=0; i<menor->datos.cantidadTipos; i++)
+		{
+			if(menor->datos.cantidadTipos-1==i)
+			{
+				printf("%s\n",menor->datos.tipos[i]);
+			}else
+			{
+				printf("%s,",menor->datos.tipos[i]);
+
+			}
+
+		}
+		printf("Evolucion Previa: %s \n",menor->evol.evolPrevia);
 		printf("Evolucion siguiente: %s\n",menor->evol.evolSiguiente);
 		printf("Region: %s", menor->region);
-		printf("Cantidad en posesion: %d\n",menor->ident.ocurrencia);
+		printf("Cantidad en posesion: %d\n",menor->datos.cantidadTipos);
 
 	}while(menor != mayor);
-}*/
+}
 
 void mostrarPokemonsOrdenadosPC(HashMap * mapa)
 {

@@ -46,8 +46,8 @@ int main()
                 else printf("\nPokemon no encontrado\n");
                 break;
             case 7:
-                //if(size(mapaPokedex) != 0) mostrarPokedex(mapaPokedex);
-                //else printf("\nNo ha atrapado a ningun Pokemon\n");
+                if(size(mapaPokedex) != 0) mostrarPokedex(mapaPokedex);
+                else printf("\nNo ha atrapado a ningun Pokemon\n");
                 break;
             case 8:
                 mostrarPokemonsOrdenadosPC(mapaNombre);
