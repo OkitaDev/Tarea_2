@@ -1,16 +1,14 @@
 #ifndef POKEMON_H
 #define POKEMON_H
 
-typedef struct tipoPokemon tipoPokemon;
-
 //Funcion para importar un archivo.csv
-void importarArchivo(HashMap *, HashMap *);
+void importarArchivo(HashMap *, HashMap *, HashMap *);
 
 //Funcion para exportar un archivo.csv
 void exportarArchivo(HashMap *);
 
 //Funcion para ingresar un pokemon al PC
-void atraparPokemon(HashMap *, HashMap *);
+void atraparPokemon(HashMap *, HashMap *, HashMap *);
 
 /*Funcion para evolucionar a 1 pokemon, buscandolo
 a través de su ID*/

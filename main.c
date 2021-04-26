@@ -10,6 +10,7 @@ int main()
     short opcion;
     HashMap * mapaNombre = createMap(24);
     HashMap * mapaID = createMap(24);
+    HashMap * mapaPokedex = createMap(15);
 
     do
     {
@@ -22,16 +23,16 @@ int main()
             case 1:
                 mostrarSeleccion();
                 opcion = ingresarOpcion(1);
-                if(opcion == 1) importarArchivo(mapaNombre, mapaID);
+                if(opcion == 1) importarArchivo(mapaNombre, mapaID, mapaPokedex);
                 else if(opcion == 2) exportarArchivo(mapaID);
                 else printf("\nNo hizo nada\n");
                 break;
             case 2:
-                if(size(mapaNombre) + 1 < 100)atraparPokemon(mapaNombre, mapaID);
+                if(size(mapaNombre) + 1 < 100)atraparPokemon(mapaNombre, mapaID, mapaPokedex);
                 else printf("\nHa superado el maximo de Pokemons!\n");
                 break;
             case 3:
-                evolucionarPokemon(mapaNombre, mapaID);
+                //evolucionarPokemon(mapaNombre, mapaID);
                 break;
             case 4:
                 busquedaPorTipo(mapaNombre);
@@ -41,12 +42,12 @@ int main()
                 else printf("\nNo ha atrapado a ningun Pokemon\n");
                 break;
             case 6:
-                if(size(mapaNombre) != 0) buscarPokemonPokedex(mapaNombre);
+                if(size(mapaPokedex) != 0) buscarPokemonPokedex(mapaPokedex);
                 else printf("\nPokemon no encontrado\n");
                 break;
             case 7:
-                if(size(mapaNombre) != 0) mostrarPokedex(mapaNombre);
-                else printf("\nNo ha atrapado a ningun Pokemon\n");
+                //if(size(mapaPokedex) != 0) mostrarPokedex(mapaPokedex);
+                //else printf("\nNo ha atrapado a ningun Pokemon\n");
                 break;
             case 8:
                 mostrarPokemonsOrdenadosPC(mapaNombre);
