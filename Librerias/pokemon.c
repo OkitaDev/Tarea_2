@@ -542,7 +542,7 @@ void buscarPokemonPokedex(HashMap * mapa)
 {
 	char nombreBuscado[25];
 	tipoPokedex * entrada;
-
+	
 	//Ingreso nombre de pokemón
 	printf("\nIngrese el pokemon a buscar: ");
 	getchar();
@@ -634,12 +634,23 @@ void mostrarPokemonsOrdenadosPC(HashMap * mapa)
 {
 
 }
-/* //al liberar un pokemon se tiene que eliminar del almacenamiento pero no de la pokedex
-void liberarPokemon(HashMap * mapa,)
+///al liberar un pokemon se tiene que eliminar del almacenamiento pero no de la pokedex
+void liberarPokemon(HashMap * mapa)
 {
-
+	/*
+	tipoPokemon * poke;
+	char eliminado[50];
+	poke = firstMap(mapa);
+	Printf("¿Que pokemon desea liberar?\n");
+	getchar();
+	fscanf("%24[^\n]s" eliminado);
+	 poke->current = searchMap(mapa, eliminado);
+	 if (poke->current != NULL){
+		 eraseMap(map, poke->current);
+	 }
+	 */
 }
-*/
+
 void mostrarPokemonRegion(HashMap * mapa)
 {
 
