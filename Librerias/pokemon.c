@@ -634,12 +634,12 @@ void mostrarPokemonsOrdenadosPC(HashMap * mapa)
 {
 
 }
-
-void liberarPokemon(HashMap * mapa)
+/* //al liberar un pokemon se tiene que eliminar del almacenamiento pero no de la pokedex
+void liberarPokemon(HashMap * mapa,)
 {
 
 }
-
+*/
 void mostrarPokemonRegion(HashMap * mapa)
 {
 
