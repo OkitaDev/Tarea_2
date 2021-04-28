@@ -9,7 +9,7 @@
 
 typedef struct tipoTipos
 {
-	char tipos[25][50];
+	char tipos[25][25];
 	int cantidadTipos;
 }tipoTipos;
 
@@ -52,6 +52,28 @@ typedef struct tipoPokedex
 	tiposIdentificaciones idents;
 }tipoPokedex;
 
+void ingresoDeTipos(tipoPokemon * pokemon)
+{
+	char tipo[25];
+	int i;
+
+	//Ingreso de los tipos
+	while(i != 25)
+	{
+		printf("\nIngrese el tipo %i del Pokemon (Ingrese no para avanzar): ", i + 1);
+		getchar();
+		fscanf(stdin, "%24[^\n]s", tipo);
+		convertirEstandar(tipo);
+		strcat(tipo, " ");
+		strcpy(pokemon->datos.tipos[i], tipo);
+		if(strcmp("No", tipo) == 0) break;
+		i++;
+	}
+
+	//Cantidad de tipos que posee el pokemon
+	pokemon->datos.cantidadTipos = i;
+}
+
 /* Funcion para ingresar datos a una variable tipoPokedex
 en conjunto de la insercion al mapaPokedex*/
 void creacionEntradaPokedex(HashMap * mapaPokedex, tipoPokedex * entrada, tipoPokemon * pokemon)
@@ -64,8 +86,8 @@ void creacionEntradaPokedex(HashMap * mapaPokedex, tipoPokedex * entrada, tipoPo
 	entrada->idents.idPokedex = pokemon->ident.idPokedex;
 
 	for(int i = 0; i < pokemon->datos.cantidadTipos; i++)
-		strcpy(entrada->datos.tipos[i], pokemon->datos.tipos[i]); 
-		
+		strcpy(entrada->datos.tipos[i], pokemon->datos.tipos[i]);
+
 	strcpy(entrada->evol.evolSiguiente, pokemon->evol.evolSiguiente);
 	strcpy(entrada->evol.evolPrevia, pokemon->evol.evolPrevia);
 	strcpy(entrada->region, pokemon->region);
@@ -76,16 +98,18 @@ void creacionEntradaPokedex(HashMap * mapaPokedex, tipoPokedex * entrada, tipoPo
 esta correcto o no*/
 short idPokedexCorrecto(HashMap * mapa, tipoPokemon * pokemon)
 {
-	tipoPokemon * aux = searchMap(mapa, pokemon->nombrePokemon);
-	if(aux != NULL)
+	tipoPokedex * auxPokedex = searchMap(mapa, pokemon->nombrePokemon);
+
+	if(auxPokedex != NULL)
 	{
-		if(aux->ident.idPokedex != pokemon->ident.idPokedex)
+		if(auxPokedex->idents.idPokedex != pokemon->ident.idPokedex)
 		{
 			printf("\nEl pokemon %s con el ID %i, posee su ID Pokedex erroneo\n",pokemon->nombrePokemon, pokemon->ident.id);
 			printf("Por lo tanto no se ingresara a la Pokedex o al PC\n");
 			return 1;
 		}
 	}
+
 	return 0;
 }
 
@@ -98,14 +122,14 @@ void idOcupado(HashMap * mapa, tipoPokemon * pokemon)
 
 	if(aux != NULL)
 	{
-		/*Ciclo while, para verificar 
+		/*Ciclo while, para verificar
 		que no choque con otro ID*/
 		while(aux != NULL)
 		{
 			pokemon->ident.id++;
 			aux = nextMap(mapa);
 		}
-		
+
 		printf("\nEl pokemon %s debera cambiar su ID %i\n", pokemon->nombrePokemon,id);
 		printf("Su nuevo ID es %i\n", pokemon->ident.id);
 	}
@@ -120,7 +144,7 @@ short elPokemonExiste(HashMap * mapa, tipoPokedex * entradaPokemon)
 	}
 	//Creacion de variable auxiliar, por si existe otro pokemon de la misma especie
 	tipoPokedex * aux = searchMap(mapa, entradaPokemon->nombrePokemon);
-	
+
 	if(aux != NULL)
 	{
 		/* Si existe, se comprueba que posean el mismo ID de la
@@ -139,7 +163,7 @@ short elPokemonExiste(HashMap * mapa, tipoPokedex * entradaPokemon)
 }
 
 /* Funcion que separa los datos del Pokemon
-y forma la variable para ser almacenada en el 
+y forma la variable para ser almacenada en el
 mapa*/
 void ingresarPokemon(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPokedex, char * lineaLeida)
 {
@@ -155,7 +179,7 @@ void ingresarPokemon(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPoked
 	//Lectura del nombre
 	fragmento = strtok(NULL, ",");
 	strcpy(nuevoPokemon->nombrePokemon, fragmento);
-	convertirEstandar(nuevoPokemon->nombrePokemon); 
+	convertirEstandar(nuevoPokemon->nombrePokemon);
 
 	//Lectura de los tipos
 	fragmento = strtok(NULL, ",");
@@ -195,7 +219,7 @@ void ingresarPokemon(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPoked
 		convertirEstandar(nuevoPokemon->datos.tipos[0]);
 		nuevoPokemon->datos.cantidadTipos = 1;
 	}
-	
+
 	//Lectura de los puntos de Combate
 	fragmento = strtok(NULL, ",");
 	nuevoPokemon->puntos.pCombate = strtol(fragmento, NULL, 10);
@@ -218,7 +242,7 @@ void ingresarPokemon(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPoked
 	fragmento = strtok(NULL, ",");
 	nuevoPokemon->ident.idPokedex = strtol(fragmento, NULL, 10);
 
-	if(idPokedexCorrecto(mapaNombre, nuevoPokemon) == 1) return;
+	if(idPokedexCorrecto(mapaPokedex, nuevoPokemon) == 1) return;
 
 	//Lectura de la Region
 	fragmento = strtok(NULL,",");
@@ -226,7 +250,7 @@ void ingresarPokemon(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPoked
 	convertirEstandar(nuevoPokemon->region);
 
 	strcpy(nuevoIngreso->nombrePokemon, nuevoPokemon->nombrePokemon);
-	
+
 	if(elPokemonExiste(mapaPokedex, nuevoIngreso) != 0)
 	{
 		creacionEntradaPokedex(mapaPokedex, nuevoIngreso, nuevoPokemon);
@@ -364,8 +388,6 @@ void atraparPokemon(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPokede
 	//Creacion de variables a usar
 	tipoPokemon * pokemonAtrapado = malloc(sizeof(tipoPokemon));
 	tipoPokedex * nuevoIngreso = malloc(sizeof(tipoPokedex));
-	char tipo[50];
-	int i;
 
 	//Ingreso del ID
 	pokemonAtrapado->ident.id = size(mapaNombre) + 1;
@@ -375,28 +397,16 @@ void atraparPokemon(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPokede
 	getchar();
 	fscanf(stdin, "%39[^\n]s", pokemonAtrapado->nombrePokemon);
 	convertirEstandar(pokemonAtrapado->nombrePokemon);
-	printf("%s", pokemonAtrapado->nombrePokemon);
 	idOcupado(mapaID, pokemonAtrapado);
 
 	//Ingreso del numero de la Pokedex
 	printf("\nIngrese el numero de ubicacion de la Pokedex: ");
 	getchar();
 	fscanf(stdin, "%i", &pokemonAtrapado->ident.idPokedex);
-	if(idPokedexCorrecto(mapaNombre, pokemonAtrapado) == 1) return;
+	if(idPokedexCorrecto(mapaPokedex, pokemonAtrapado) == 1) return;
 
-	//Ingreso de los tipos
-	for(i = 0; i < 25; i++)
-	{
-		printf("\nIngrese el tipo %i del Pokemon (Ingrese no para parar): ", i + 1);
-		getchar();
-		fscanf(stdin, "%49[^\n]s", tipo);
-		convertirEstandar(tipo);
-		if(strcmp("No", tipo) == 0) break;
-		strcat(tipo, " ");
-		strcpy(pokemonAtrapado->datos.tipos[i], tipo);
-	}
-	//Cantidad de tipos que posee el pokemon
-	pokemonAtrapado->datos.cantidadTipos = i;
+	//Ingreso de los tipos del Pokemon
+	ingresoDeTipos(pokemonAtrapado);
 
 	//Ingreso de PC y PS
 	printf("\nIngrese los PS del Pokemon: ");
@@ -407,10 +417,7 @@ void atraparPokemon(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPokede
 	fscanf(stdin, "%i", &pokemonAtrapado->puntos.pCombate);
 
 	//Ingreso del sexo del Pokemon
-	printf("\nIngrese el sexo del Pokemon: ");
-	getchar();
-	fscanf(stdin, "%24[^\n]s", pokemonAtrapado->sexo);
-	convertirEstandar(pokemonAtrapado->sexo);
+	validarSexo(pokemonAtrapado->sexo);
 
 	//Ingreso de las evoluciones
 	printf("\nIngrese la evolucion anterior del Pokemon: ");
@@ -444,7 +451,7 @@ void atraparPokemon(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPokede
 void evolucionarPokemon(HashMap * mapaID, HashMap * mapaPokedex)
 {
 	int idBuscado;
-	
+
 	//Busqueda del Pokemon a evolucionar
 	printf("\nIngrese el ID del pokemon: ");
 	getchar();
@@ -452,7 +459,7 @@ void evolucionarPokemon(HashMap * mapaID, HashMap * mapaPokedex)
 
 	tipoPokemon * auxPokemon = searchMap(mapaID, &idBuscado);
 
-	//Si existe el ID o no	
+	//Si existe el ID o no
 	if(auxPokemon != NULL)
 	{
 		//Si posee evolucion o no
@@ -462,7 +469,7 @@ void evolucionarPokemon(HashMap * mapaID, HashMap * mapaPokedex)
 			printf("PS: %i PC: %i\n", auxPokemon->puntos.pSalud, auxPokemon->puntos.pCombate);
 
 			//Variable para almacenar el nombre del pokemon sin evolucionar
-			char auxNombre[25]; 
+			char auxNombre[25];
 			strcpy(auxNombre,auxPokemon->nombrePokemon);
 
 			//Variable para buscar el pokemon en la pokedex y reducir su cantidad
@@ -474,7 +481,7 @@ void evolucionarPokemon(HashMap * mapaID, HashMap * mapaPokedex)
 			strcpy(auxPokemon->evol.evolPrevia, auxNombre);
 			auxPokemon->puntos.pSalud = round(auxPokemon->puntos.pSalud * 1.25);
 			auxPokemon->puntos.pCombate = round(auxPokemon->puntos.pCombate * 1.50);
-			
+
 			//Variable para encontrar si hay mas de la especie o no
 			tipoPokedex * auxPokedex2 = searchMap(mapaPokedex, auxPokemon->nombrePokemon);
 			short existe = elPokemonExiste(mapaPokedex, auxPokedex2);
@@ -482,6 +489,10 @@ void evolucionarPokemon(HashMap * mapaID, HashMap * mapaPokedex)
 			if(existe == 0) //Si hay mas de su especie, se usa esa evolucion
 			{
 				strcpy(auxPokemon->evol.evolSiguiente, auxPokedex2->evol.evolSiguiente);
+				for(int i = 0; i < auxPokedex2->cantidadAtrapado; i++)
+					strcpy(auxPokemon->datos.tipos[i], auxPokedex2->datos.tipos[i]);
+
+				auxPokemon->datos.cantidadTipos = auxPokedex2->datos.cantidadTipos;
 			}
 			else //Si no, se debe ingresar la evolucion
 			{
@@ -489,6 +500,7 @@ void evolucionarPokemon(HashMap * mapaID, HashMap * mapaPokedex)
 				getchar();
 				fscanf(stdin, "%24[^\n]s", auxPokemon->evol.evolSiguiente);
 				convertirEstandar(auxPokemon->evol.evolSiguiente);
+				ingresoDeTipos(auxPokemon);
 				//Creacion de nueva entrada Pokedex
 				auxPokedex2 = malloc (sizeof(tipoPokedex));
 				strcpy(auxPokedex2->nombrePokemon, auxPokemon->nombrePokemon);
@@ -534,7 +546,7 @@ void buscarPokemonNombre(HashMap * mapa)
 	{
 		if(strcmp(pokemonAuxiliar->nombrePokemon, nombreBuscado) == 0)
 		{
-			printf("\n%s Sexo: %s\n", pokemonAuxiliar->nombrePokemon, pokemonAuxiliar->sexo);
+			printf("\nNombre: %s Sexo: %s\n", pokemonAuxiliar->nombrePokemon, pokemonAuxiliar->sexo);
 			printf("Tipo(s): ");
 
 			for(int i = 0; i < pokemonAuxiliar->datos.cantidadTipos; i++)
@@ -555,7 +567,7 @@ void buscarPokemonPokedex(HashMap * mapa)
 {
 	char nombreBuscado[25];
 	tipoPokedex * entrada;
-	
+
 	//Ingreso nombre de pokemón
 	printf("\nIngrese el pokemon a buscar: ");
 	getchar();
@@ -570,7 +582,7 @@ void buscarPokemonPokedex(HashMap * mapa)
 	{
 		printf("\nNombre: %s Numero Pokedex: %i\n", entrada->nombrePokemon, entrada->idents.idPokedex);
 		printf("Region: %sTipos: ", entrada->region);
-		
+
 		for(int i = 0; i < entrada->datos.cantidadTipos; i++)
 			printf("%s", entrada->datos.tipos[i]);
 
