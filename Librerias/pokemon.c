@@ -664,22 +664,39 @@ void mostrarPokedex(HashMap * mapa)
 
 void mostrarPokemonsOrdenadosPC(HashMap * mapa)
 {
-
+//del esteban
 }
 ///al liberar un pokemon se tiene que eliminar del almacenamiento pero no de la pokedex
-void liberarPokemon(HashMap * mapa)
+void liberarPokemon(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPokedex)
 {
-	/*
+	//del esteban
+	/*	
 	tipoPokemon * poke;
-	char eliminado[50];
-	poke = firstMap(mapa);
+
+	int eliminado;
+
 	Printf("¿Que pokemon desea liberar?\n");
+	
 	getchar();
-	fscanf("%24[^\n]s" eliminado);
-	 poke->current = searchMap(mapa, eliminado);
-	 if (poke->current != NULL){
-		 eraseMap(map, poke->current);
+
+	fscanf(stdin,"%i" , &eliminado);
+
+	poke = searchMap(mapaID, &eliminado);
+        
+
+ if (poke != NULL){
+    	tipoPokedex * auxPoke = searchMap(mapaPokedex,eliminado);
+      	auxPoke->cantidadAtrapado--;
+		eraseMap(mapaNombre, poke->nombrePokemon);
+        eraseMap(mapaID, &poke->ident.id);
 	 }
+  
+        else{
+           Printf(“El pokemon no se encontro”);
+        }
+
+	}
+
 	 */
 }
 

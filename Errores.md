@@ -8,4 +8,4 @@
 
 - Evolucionar Pokemon, cambiar la ocurrencia al evolucionarlo, sacandole 1 al pokemon que era antes
 
--Al momento de ingresar tipos, sugiero explicar para para los tipos( al terminar sus tipos coloca "no" para continuar) como ejemplo igual se puede explicar mejor
+- Al momento de ingresar tipos, sugiero explicar para para los tipos( al terminar sus tipos coloca "no" para continuar) como ejemplo igual se puede explicar mejor
