@@ -73,9 +73,10 @@ void validarSexo(char * sexo)
         fscanf(stdin, "%20[^\n]s", sexo);
         convertirEstandar(sexo);
         
-        if(strcmp(sexo, "Macho") == 0 && strcmp(sexo, "Hembra") == 0 && strcmp(sexo, "No tiene") == 0)
-            break;
-        
-        printf("\nPor favor, ingrese Macho, Hembra o No tiene\n");
+        if(strcmp(sexo, "Macho") != 0 && strcmp(sexo, "Hembra") != 0 && strcmp(sexo, "No tiene") != 0)
+        {    
+            printf("\nPor favor, ingrese Macho, Hembra o No tiene\n");
+        }
+
     } while (strcmp(sexo, "Macho") != 0 && strcmp(sexo, "Hembra") != 0 && strcmp(sexo, "No tiene") != 0);
 }
