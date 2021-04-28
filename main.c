@@ -57,7 +57,7 @@ int main()
                 //liberarPokemon(mapaID);
                 break;
             case 10:
-                mostrarPokemonRegion(mapaNombre);
+                mostrarPokemonRegion(mapaPokedex);
                 break;
         }
         opcion = 1;

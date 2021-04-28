@@ -61,7 +61,7 @@ void convertirEstandar(char * cadena)
         cadena[i] = tolower(cadena[i]);
 
     int largo = strlen(cadena) - 1;
-    if(cadena[largo] == ' ') cadena[largo] = '\0';
+    if(cadena[largo] == ' ' || cadena[largo] == '\n') cadena[largo] = '\0';
 }
 
 void validarSexo(char * sexo)
