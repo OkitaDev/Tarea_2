@@ -186,12 +186,19 @@ void * searchMap(HashMap * map,  void * key) {
 
 void * firstMap(HashMap * map)
 {
-	long indice = map->current + 1;
+	long indice = 0;
 
-	while(map->buckets[indice] == NULL)
+	while(indice < map->capacity)
 	{
+		if(map->buckets[indice] != NULL){
+			if(map->buckets[indice]->key != NULL){
+				break;
+			}
+		}
 		indice++;
-		indice %= map->capacity;
+		if(indice == map->capacity){
+			return NULL;
+		}
 	}
 
 	if(map->buckets[0] != NULL) indice = 0;
@@ -202,15 +209,23 @@ void * firstMap(HashMap * map)
 
 void * nextMap(HashMap * map)
 {
-	for(int i = map->current + 1; i < map->capacity; i++)
-	{
-		if(map->buckets[i] != NULL)
-		{
-			map->current = i;
-			return map->buckets[i]->value;
-		}
-	}
-	return NULL;
+	long indice = map->current+1;
+
+  	while(indice < map->capacity){
+
+    if(map->buckets[indice] != NULL){
+      if(map->buckets[indice]->key != NULL){
+        break;
+      }
+    }
+    indice++;
+    if(indice == map->capacity){
+      return NULL;
+    }
+  }
+
+  map->current = indice;
+  return map->buckets[indice]->value;
 }
 
 long size (HashMap * map)
