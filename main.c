@@ -32,7 +32,7 @@ int main()
                 else printf("\nHa superado el maximo de Pokemons!\n");
                 break;
             case 3:
-                //evolucionarPokemon(mapaNombre, mapaID);
+                evolucionarPokemon(mapaID,mapaPokedex);
                 break;
             case 4:
                 busquedaPorTipo(mapaNombre);
@@ -53,7 +53,7 @@ int main()
                 mostrarPokemonsOrdenadosPC(mapaNombre);
                 break;
             case 9:
-                liberarPokemon(mapaID);
+                //liberarPokemon(mapaID);
                 break;
             case 10:
                 mostrarPokemonRegion(mapaNombre);
@@ -70,6 +70,7 @@ int main()
     //Liberacion de memoria
     free(mapaNombre);
     free(mapaID);
+    free(mapaPokedex);
 
     return 0;
 }
