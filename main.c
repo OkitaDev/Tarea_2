@@ -8,9 +8,9 @@
 int main()
 {
     short opcion;
-    HashMap * mapaNombre = createMap(24);
-    HashMap * mapaID = createMap(24);
-    HashMap * mapaPokedex = createMap(15);
+    HashMap * mapaNombre = createMap(10);
+    HashMap * mapaID = createMap(10);
+    HashMap * mapaPokedex = createMap(10);
 
     do
     {
@@ -28,11 +28,12 @@ int main()
                 else printf("\nNo hizo nada\n");
                 break;
             case 2:
-                if(size(mapaNombre) + 1 < 100)atraparPokemon(mapaNombre, mapaID, mapaPokedex);
+                if(size(mapaNombre) < 100)atraparPokemon(mapaNombre, mapaID, mapaPokedex);
                 else printf("\nHa superado el maximo de Pokemons!\n");
                 break;
             case 3:
-                evolucionarPokemon(mapaID,mapaPokedex);
+                if(size(mapaID) < 100) evolucionarPokemon(mapaID, mapaPokedex);
+                else printf("\nHa superado el maximo de Pokemons!\n");
                 break;
             case 4:
                 busquedaPorTipo(mapaNombre);

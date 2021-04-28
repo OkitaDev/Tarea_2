@@ -62,8 +62,9 @@ int is_equal_entero(void* key1, void* key2)
 
 void insertMap(HashMap * map, void * key, void * value)
 {
+	if(round(map->capacity * 0.7) == map->size) enlarge(map);
 	long indice;
-	if( (unsigned long)key < 1000 ){
+	if( (unsigned long) key < 1000 ){
 		indice = hashEntero(key, map->capacity);
 	}else{
 		indice = hashCaracter(key, map->capacity);

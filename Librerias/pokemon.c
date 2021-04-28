@@ -85,10 +85,6 @@ void ingresoDeTipos(tipoPokemon * pokemon)
 en conjunto de la insercion al mapaPokedex*/
 void creacionEntradaPokedex(HashMap * mapaPokedex, tipoPokedex * entrada, tipoPokemon * pokemon)
 {
-	if(size(mapaPokedex) == round(capacity(mapaPokedex) * 0.7))
-	{
-		enlarge(mapaPokedex);
-	}
 	entrada->datos.cantidadTipos = pokemon->datos.cantidadTipos;
 	entrada->idents.idPokedex = pokemon->ident.idPokedex;
 
@@ -272,13 +268,6 @@ void ingresarPokemon(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPoked
 para poder ser leidas por ingresarPokemon()*/
 void importarArchivo(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPokedex)
 {
-	//Si hay mas de 100 pokemon, no hace nada
-	if(size(mapaNombre) >= 100)
-	{
-		printf("\nHa superado el maximo de Pokemons!\n");
-		return;
-	}
-
 	//Ingreso del nombre del archivo a implementar
 	char nombreArchivo[40];
 	printf("\nIngrese el nombre del archivo (Incluyendo el .csv): ");
@@ -303,20 +292,12 @@ void importarArchivo(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPoked
 	while(fgets(lineaLeida, 100, archivo))
 	{
 		//If por si hay mas de 100 pokemon
-		if(size(mapaNombre) + 1 >= 100)
+		if(size(mapaNombre) >= 100)
 		{
 			printf("\nHa superado el maximo de Pokemons\n");
 			printf("Se ha podido algunos implementar pokemons!\n");
 			break;
 		}
-
-		//If para aumentar el tamaño de los mapas
-		if(size(mapaNombre) == round(capacity(mapaNombre) * 0.7))
-		{
-			enlarge(mapaNombre);
-			enlarge(mapaID);
-		}
-
 		//Llamada a funcion para insertar en el mapa
 		ingresarPokemon(mapaNombre, mapaID, mapaPokedex,lineaLeida);
 	}
@@ -385,13 +366,6 @@ void exportarArchivo(HashMap * mapa)
 nuevo pokemon*/
 void atraparPokemon(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPokedex)
 {
-	//Aumento de tamaño de los mapas
-	if(size(mapaNombre) == round(capacity(mapaNombre) * 0.7))
-	{
-		enlarge(mapaNombre);
-		enlarge(mapaID);
-	}
-
 	//Creacion de variables a usar
 	tipoPokemon * pokemonAtrapado = malloc(sizeof(tipoPokemon));
 	tipoPokedex * nuevoIngreso = malloc(sizeof(tipoPokedex));
