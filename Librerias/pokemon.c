@@ -64,10 +64,17 @@ void ingresoDeTipos(tipoPokemon * pokemon)
 		getchar();
 		fscanf(stdin, "%24[^\n]s", tipo);
 		convertirEstandar(tipo);
-		if(strcmp("No", tipo) == 0) break;
-		strcat(tipo, " ");
-		strcpy(pokemon->datos.tipos[i], tipo);
-		i++;
+		if(i == 0 && strcmp(tipo, "No") == 0)
+		{
+			printf("\nEl pokemon debe tener al menos 1 tipo\n");
+		}
+		else
+		{
+			if(strcmp("No", tipo) == 0) break;
+			strcat(tipo, " ");
+			strcpy(pokemon->datos.tipos[i], tipo);
+			i++;
+		}
 	}
 
 	//Cantidad de tipos que posee el pokemon
