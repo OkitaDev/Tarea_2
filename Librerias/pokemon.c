@@ -64,9 +64,9 @@ void ingresoDeTipos(tipoPokemon * pokemon)
 		getchar();
 		fscanf(stdin, "%24[^\n]s", tipo);
 		convertirEstandar(tipo);
+		if(strcmp("No", tipo) == 0) break;
 		strcat(tipo, " ");
 		strcpy(pokemon->datos.tipos[i], tipo);
-		if(strcmp("No", tipo) == 0) break;
 		i++;
 	}
 
