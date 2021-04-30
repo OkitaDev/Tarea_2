@@ -210,23 +210,15 @@ void * firstMap(HashMap * map)
 
 void * nextMap(HashMap * map)
 {
-	long indice = map->current+1;
-
-  	while(indice < map->capacity){
-
-    if(map->buckets[indice] != NULL){
-      if(map->buckets[indice]->key != NULL){
-        break;
-      }
-    }
-    indice++;
-    if(indice == map->capacity){
-      return NULL;
-    }
-  }
-
-  map->current = indice;
-  return map->buckets[indice]->value;
+	for(int i = map->current + 1; i < map->capacity; i++)
+	{
+		if(map->buckets[i] != NULL)
+		{
+			map->current = i;
+			return map->buckets[i]->value;
+		}
+	}
+	return NULL;
 }
 
 long size (HashMap * map)
@@ -234,7 +226,3 @@ long size (HashMap * map)
 	return map->size;
 }
 
-long capacity (HashMap * map)
-{
-	return map->capacity;
-}

@@ -208,7 +208,7 @@ void lecturaDeInformacion(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapa
 	{
 		//Eliminacion de las comillas iniciales
 		memmove(fragmento, fragmento + 1, strlen(fragmento));
-
+		
 		//Copia de informacion
 		strcpy(nuevoPokemon->datos.tipos[0], fragmento);
 		convertirEstandar(nuevoPokemon->datos.tipos[0]);
@@ -576,11 +576,12 @@ void buscarPokemonNombre(HashMap * mapa)
 	fscanf(stdin, "%24[^\n]s", nombreBuscado);
 	convertirEstandar(nombreBuscado);
 
-	pokemonAuxiliar = searchMap(mapa, nombreBuscado); //Buscar al primer pokemon con ese nombre
+	pokemonAuxiliar = firstMap(mapa); //Buscar al primer pokemon con ese nombre
 
 	/*Se recorre el Mapa ya que no se sabe la cantidad de Pokemons
 	atrapados con el mismo nombre, en vez de usar la funcion searchMap,
 	ya que esta entrega solo uno de los posibles pokemon*/
+
 	while(pokemonAuxiliar != NULL)
 	{
 		if(strcmp(pokemonAuxiliar->nombrePokemon, nombreBuscado) == 0)
@@ -589,13 +590,15 @@ void buscarPokemonNombre(HashMap * mapa)
 			printf("Tipo(s): ");
 
 			for(int i = 0; i < pokemonAuxiliar->datos.cantidadTipos; i++)
-				printf("%s", pokemonAuxiliar->datos.tipos[i]);
+				printf("%s ", pokemonAuxiliar->datos.tipos[i]);
 
 			printf("\nID: %i Pokedex: %i\n", pokemonAuxiliar->ident.id, pokemonAuxiliar->ident.idPokedex);
 			printf("PS: %i PC: %i\n", pokemonAuxiliar->puntos.pSalud, pokemonAuxiliar->puntos.pCombate);
 			existePokemon = 1;
 		}
+
 		pokemonAuxiliar = nextMap(mapa);
+		if(pokemonAuxiliar == NULL) break;
 	}
 
 	//Si no se encuentra, se indica que no existe
