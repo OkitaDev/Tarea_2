@@ -354,7 +354,7 @@ void exportarArchivo(HashMap * mapa)
 		//Ingreso de los demas datos
 		fprintf(archivo, ",%i,%i,%s",auxPokemon->puntos.pCombate ,auxPokemon->puntos.pSalud, auxPokemon->sexo);
 		fprintf(archivo, ",%s,%s",auxPokemon->evol.evolPrevia, auxPokemon->evol.evolSiguiente);
-		fprintf(archivo, ",%i,%s", auxPokemon->ident.idPokedex, auxPokemon->region);
+		fprintf(archivo, ",%i,%s\n", auxPokemon->ident.idPokedex, auxPokemon->region);
 		auxPokemon = nextMap(mapa);
 	}
 
