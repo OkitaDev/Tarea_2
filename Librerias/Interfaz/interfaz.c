@@ -2,6 +2,7 @@
 #include <string.h>
 #include <ctype.h>
 
+//Muestra el menu
 void mostrarMenuPokedex()
 {
     printf("\n ---------\n");
@@ -21,6 +22,7 @@ void mostrarMenuPokedex()
     printf("0. Salir de la Pokedex\n");
 }
 
+//Muestra un sub menu
 void mostrarSeleccion()
 {
     printf("\n1. Importar archivo .csv\n");
@@ -28,6 +30,7 @@ void mostrarSeleccion()
     printf("0. No hacer nada\n");
 }
 
+//Eleccion de opciones en un intervalo
 short ingresarOpcion(short pregunta)
 {
     short opcion;
@@ -52,8 +55,13 @@ short ingresarOpcion(short pregunta)
 
 }
 
+//Funcion para dejar de un modo las cadenas
 void convertirEstandar(char * cadena)
 {
+    //Sacar un espacio extra
+    if(cadena[0] == ' ') memmove(cadena, cadena + 1, strlen(cadena));
+
+    //Primer caracter en mayuscula
     cadena[0] = toupper(cadena[0]);
 
     //Va caracter por caracter pasandolo a minuscula
@@ -64,15 +72,18 @@ void convertirEstandar(char * cadena)
     if(cadena[largo] == ' ' || cadena[largo] == '\n') cadena[largo] = '\0';
 }
 
+//Validacion de que se ingrese Macho, Hembra o No tiene
 void validarSexo(char * sexo)
 {
     do
     {
+        //Ingreso de la cadena
         printf("\nIngrese el sexo del Pokemon: ");
         getchar();
         fscanf(stdin, "%20[^\n]s", sexo);
         convertirEstandar(sexo);
         
+        //Mensaje si no se cumple
         if(strcmp(sexo, "Macho") != 0 && strcmp(sexo, "Hembra") != 0 && strcmp(sexo, "No tiene") != 0)
         {    
             printf("\nPor favor, ingrese Macho, Hembra o No tiene\n");
