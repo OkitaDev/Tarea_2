@@ -741,33 +741,41 @@ void liberarPokemon(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPokede
 
 void mostrarPokemonRegion(HashMap * mapa)
 {
-	tipoPokedex * pokemon=firstMap(mapa);
-	char regionbuscada[25];
-    printf("\nIngrese la region a buscar: \n");
+	tipoPokedex * pokemon = firstMap(mapa);
+	char regionBuscada[25];
+
+    printf("\nIngrese la Region a buscar: ");
 	getchar();
-	fscanf(stdin,"%24s",regionbuscada);
-	convertirEstandar(regionbuscada);
-	printf("\n%s:\n",regionbuscada);
-	do{
-		if(strcmp(pokemon->region,regionbuscada)==0 && pokemon->cantidadAtrapado!=0)
+	fscanf(stdin,"%24s",regionBuscada);
+	convertirEstandar(regionBuscada);
+	
+	printf("\nPokemons pertenecientes a %s:\n",regionBuscada);
+	
+	do
+	{
+		if(strcmp(pokemon->region,regionBuscada) == 0 && pokemon->cantidadAtrapado != 0)
 		{
             printf("\n%d)%s\n",pokemon->idents.idPokedex,pokemon->nombrePokemon);
 			printf("Tipo(s): ");
-			for(int i=0;i<pokemon->datos.cantidadTipos;i++)
+
+			for(int i = 0;i < pokemon->datos.cantidadTipos;i++)
 			{
-                if(pokemon->datos.cantidadTipos-1==i){
+                if(pokemon->datos.cantidadTipos - 1 == i)
+				{
 					printf("%s\n",pokemon->datos.tipos[i]);
-				}else
+				}
+				else
 				{
                     printf("%s, ",pokemon->datos.tipos[i]);
 				}
 			}
+
 			printf("Evolucion Previa: %s\n",pokemon->evol.evolPrevia);
 			printf("Evolucion Siguiente: %s\n",pokemon->evol.evolSiguiente);
 			printf("Cantidad en posesion: %d\n",pokemon->cantidadAtrapado);
 		}
-		pokemon=nextMap(mapa);
+		pokemon = nextMap(mapa);
 
-	}while(pokemon!=NULL);
+	}while(pokemon != NULL);
 
 }
