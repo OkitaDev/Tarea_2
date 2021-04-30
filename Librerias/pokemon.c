@@ -695,7 +695,7 @@ void mostrarPokedex(HashMap * mapa)
 		printf("Evolucion Previa: %s \n",menor->evol.evolPrevia);
 		printf("Evolucion siguiente: %s\n",menor->evol.evolSiguiente);
 		printf("Region: %s ", menor->region);
-		printf("Cantidad en posesion: %d\n",menor->datos.cantidadTipos);
+		printf("Cantidad en posesion: %d\n",menor->cantidadAtrapado);
 
 	}while(menor != mayor);
 }
