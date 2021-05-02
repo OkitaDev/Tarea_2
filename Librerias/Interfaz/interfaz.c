@@ -86,7 +86,7 @@ void validarSexo(char * sexo)
         //Mensaje si no se cumple
         if(strcmp(sexo, "Macho") != 0 && strcmp(sexo, "Hembra") != 0 && strcmp(sexo, "No tiene") != 0)
         {    
-            printf("\nPor favor, ingrese Macho, Hembra o No tiene\n");
+            printf("\nPor favor, ingrese %cMacho%c, %cHembra%c o %cNo tiene%c\n", 34, 34, 34, 34, 34, 34);
         }
 
     } while (strcmp(sexo, "Macho") != 0 && strcmp(sexo, "Hembra") != 0 && strcmp(sexo, "No tiene") != 0);
