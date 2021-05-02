@@ -559,6 +559,48 @@ void evolucionarPokemon(HashMap * mapaID, HashMap * mapaPokedex)
 
 void busquedaPorTipo(HashMap * mapa)
 {
+	char tipoBuscado[25];
+	tipoPokemon * pokemonAuxiliar;
+	int contTipos;
+	int i;
+	short existe = 0;
+
+	printf("\nIngrese el tipo que desea buscar: ");
+	getchar();
+	fscanf(stdin, "%24[^\n]s", tipoBuscado);
+	convertirEstandar(tipoBuscado);
+	
+	pokemonAuxiliar = firstMap(mapa);
+
+	while(pokemonAuxiliar != NULL)
+	{
+		//printf("%s tiene %d tipo(s):\n",pokemonAuxiliar->nombrePokemon, pokemonAuxiliar->datos.cantidadTipos);
+
+		contTipos = pokemonAuxiliar->datos.cantidadTipos - 1;
+		//printf("pokemon: %s\n",pokemonAuxiliar->nombrePokemon);
+		while(contTipos != -1){
+			//printf("%s = %s\n->",pokemonAuxiliar->datos.tipos[contTipos], tipoBuscado);
+			if(strcmp(pokemonAuxiliar->datos.tipos[contTipos], tipoBuscado) == 0){
+				printf("\nID: %d Nombre: %s\nTipo(s): ",pokemonAuxiliar->ident.id, pokemonAuxiliar->nombrePokemon);
+				
+				for(i = 0 ; i < pokemonAuxiliar->datos.cantidadTipos ; i++){
+					printf("%s ", pokemonAuxiliar->datos.tipos[i]);
+				}
+				printf("\n");
+				printf("PS: %i PC: %i\n", pokemonAuxiliar->puntos.pSalud, pokemonAuxiliar->puntos.pCombate);
+
+				existe = 1; //Indica que encontro al menos 1 con el tipo similar al que pide
+			}
+			contTipos--;
+		}
+		//printf("\n\n");
+		pokemonAuxiliar = nextMap(mapa);
+		if(pokemonAuxiliar == NULL) break;
+	}
+
+	if(existe == 0){
+		printf("\nEl tipo que ingreso no existe o no hay ningun pokemon de ese tipo\n");
+	}
 
 }
 

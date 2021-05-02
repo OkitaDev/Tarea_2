@@ -36,7 +36,8 @@ int main()
                 else printf("\nHa superado el maximo de Pokemons!\n");
                 break;
             case 4:
-                busquedaPorTipo(mapaNombre);
+                if(size(mapaID) != 0) busquedaPorTipo(mapaID);
+                else printf("\nNo ha atrapado a ningun Pokemon\n");
                 break;
             case 5:
                 if(size(mapaNombre) != 0) buscarPokemonNombre(mapaNombre);
