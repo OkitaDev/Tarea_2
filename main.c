@@ -36,8 +36,7 @@ int main()
                 else printf("\nHa superado el maximo de Pokemons!\n");
                 break;
             case 4:
-                if(size(mapaID) != 0) busquedaPorTipo(mapaID);
-                else printf("\nNo ha atrapado a ningun Pokemon\n");
+                busquedaPorTipo(mapaNombre);
                 break;
             case 5:
                 if(size(mapaNombre) != 0) buscarPokemonNombre(mapaNombre);
@@ -55,7 +54,8 @@ int main()
                 mostrarPokemonsOrdenadosPC(mapaNombre);
                 break;
             case 9:
-                //liberarPokemon(mapaID);
+                if(size(mapaID) != 0) liberarPokemon(mapaNombre, mapaID, mapaPokedex);
+                else printf("\n No se ha liberado ningun Pokemon\n");
                 break;
             case 10:
                 mostrarPokemonRegion(mapaPokedex);

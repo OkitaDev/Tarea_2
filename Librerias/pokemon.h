@@ -31,7 +31,7 @@ posee mayor PC al que tiene menor PC*/
 void mostrarPokemonsOrdenadosPC(HashMap *);
 
 //Funcion para liberar 1 pokemon a través de su ID
-void liberarPokemon(HashMap *);
+void liberarPokemon(HashMap *, HashMap *, HashMap * );
 
 //Mostrar todos los pokemons de una region
 void mostrarPokemonRegion(HashMap *);
