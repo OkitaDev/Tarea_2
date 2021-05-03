@@ -41,10 +41,6 @@ long hashCaracter( char * key, long capacity)
     }
     return hash%capacity;
 }
-long hashEntero( void * key, long capacity)
-{
-    return ((unsigned long )key)%capacity;
-}
 
 int is_equal_caracter(void* key1, void* key2)
 {
@@ -52,23 +48,12 @@ int is_equal_caracter(void* key1, void* key2)
     if(strcmp((char*)key1,(char*)key2) == 0) return 1;
     return 0;
 }
-int is_equal_entero(void* key1, void* key2)
-{
-    if(key1 == NULL || key2 == NULL) return 0;
-    if(key1 == key2) return 1;
-    return 0;
-}
 
 
 void insertMap(HashMap * map, void * key, void * value)
 {
 	if(round(map->capacity * 0.7) == map->size) enlarge(map);
-	long indice;
-	if( (unsigned long) key < 1000 ){
-		indice = hashEntero(key, map->capacity);
-	}else{
-		indice = hashCaracter(key, map->capacity);
-	}
+	long indice = hashCaracter(key, map->capacity);
 	
 
 	while(map->buckets[indice] != NULL && map->buckets[indice]->key != 0)
@@ -115,74 +100,39 @@ HashMap * createMap(long capacity)
 
 void eraseMap(HashMap * map,  void * key)
 {
-	long indice;
-	if( (unsigned long)key < 1000 ){
-		indice = hashEntero(key, map->capacity);
+	long indice = hashCaracter(key, map->capacity);
 
-		while(map->buckets[indice] != NULL)
+	while(map->buckets[indice] != NULL)
+	{
+		if(is_equal_caracter(key, map->buckets[indice]->key))
 		{
-			if(is_equal_entero(key, map->buckets[indice]->key))
-			{
-				map->buckets[indice]->key = NULL;
-				map->size--;
-				return;
-			}
-			indice++;
-			indice %= map->capacity;
+			printf("%s %s\n", key, map->buckets[indice]->key);
+			map->buckets[indice]->key = NULL;
+			map->buckets[indice] = NULL;
+			map->size--;
+			return;
 		}
-	}else{
-		indice = hashCaracter(key, map->capacity);
 
-		while(map->buckets[indice] != NULL)
-		{
-			if(is_equal_caracter(key, map->buckets[indice]->key))
-			{
-				map->buckets[indice]->key = NULL;
-				map->size--;
-				return;
-			}
-			indice++;
-			indice %= map->capacity;
-		}
+		indice++;
+		indice %= map->capacity;
 	}
-
-	
 }
 
 void * searchMap(HashMap * map,  void * key) {
-	long indice;
-	if( (unsigned long)key < 1000 ){
-		indice = hashEntero(key, map->capacity);
+	long indice = hashCaracter(key, map->capacity);
 
-		while(map->buckets[indice] != NULL)
+	while(map->buckets[indice] != NULL)
+	{
+		if(is_equal_caracter(map->buckets[indice]->key, key))
 		{
-			if(is_equal_entero(map->buckets[indice]->key, key))
-			{
-				map->current = indice;
-				return map->buckets[indice]->value;
-			}
-			indice++;
-			indice %= map->capacity;
+			map->current = indice;
+			return map->buckets[indice]->value;
 		}
-
-	}else{
-		indice = hashCaracter(key, map->capacity);
-
-		while(map->buckets[indice] != NULL)
-		{
-			if(is_equal_caracter(map->buckets[indice]->key, key))
-			{
-				map->current = indice;
-				return map->buckets[indice]->value;
-			}
-			indice++;
-			indice %= map->capacity;
-		}
+		indice++;
+		indice %= map->capacity;
 	}
 
-	
-
-  return NULL;
+  	return NULL;
 }
 
 void * firstMap(HashMap * map)
