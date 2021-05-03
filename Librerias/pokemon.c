@@ -63,7 +63,7 @@ void ingresoDeTipos(tipoPokemon * pokemon)
 	while(i != 25)
 	{
 		//Ingreso del tipo
-		printf("\nIngrese el tipo %i del Pokemon (Ingrese no para avanzar): ", i + 1);
+		printf("\nIngrese el tipo %i del Pokemon (Ingrese %cno%c para avanzar): ", i + 1, 34, 34);
 		getchar();
 		fscanf(stdin, "%24[^\n]s", tipo);
 		
@@ -503,6 +503,9 @@ void evolucionarPokemon(HashMap * mapaID, HashMap * mapaPokedex)
 			tipoPokedex * auxPokedex = searchMap(mapaPokedex, auxPokemon->nombrePokemon);
 			if(auxPokedex != NULL) auxPokedex->cantidadAtrapado--;
 
+			//Aumento de numero de ID Pokemon
+			auxPokemon->ident.idPokedex++;
+
 			//Cambio en el orden de evoluciones
 			strcpy(auxPokemon->nombrePokemon, auxPokemon->evol.evolSiguiente);
 			strcpy(auxPokemon->evol.evolPrevia, auxNombre);
@@ -562,7 +565,6 @@ void busquedaPorTipo(HashMap * mapa)
 	char tipoBuscado[25];
 	tipoPokemon * pokemonAuxiliar;
 	int contTipos;
-	int i;
 	short existe = 0;
 
 	printf("\nIngrese el tipo que desea buscar: ");
@@ -574,32 +576,30 @@ void busquedaPorTipo(HashMap * mapa)
 
 	while(pokemonAuxiliar != NULL)
 	{
-		//printf("%s tiene %d tipo(s):\n",pokemonAuxiliar->nombrePokemon, pokemonAuxiliar->datos.cantidadTipos);
-
 		contTipos = pokemonAuxiliar->datos.cantidadTipos - 1;
-		//printf("pokemon: %s\n",pokemonAuxiliar->nombrePokemon);
-		while(contTipos != -1){
-			//printf("%s = %s\n->",pokemonAuxiliar->datos.tipos[contTipos], tipoBuscado);
-			if(strcmp(pokemonAuxiliar->datos.tipos[contTipos], tipoBuscado) == 0){
-				printf("\nID: %d Nombre: %s\nTipo(s): ",pokemonAuxiliar->ident.id, pokemonAuxiliar->nombrePokemon);
+	
+		while(contTipos != -1)
+		{
+			if(strcmp(pokemonAuxiliar->datos.tipos[contTipos], tipoBuscado) == 0)
+			{
+				printf("\n%s ID: %d \nTipo(s): ",pokemonAuxiliar->nombrePokemon, pokemonAuxiliar->ident.id);
 				
-				for(i = 0 ; i < pokemonAuxiliar->datos.cantidadTipos ; i++){
+				for(int i = 0; i < pokemonAuxiliar->datos.cantidadTipos; i++)
 					printf("%s ", pokemonAuxiliar->datos.tipos[i]);
-				}
-				printf("\n");
-				printf("PS: %i PC: %i\n", pokemonAuxiliar->puntos.pSalud, pokemonAuxiliar->puntos.pCombate);
+				
+				printf("\nPS: %i PC: %i\n", pokemonAuxiliar->puntos.pSalud, pokemonAuxiliar->puntos.pCombate);
 
 				existe = 1; //Indica que encontro al menos 1 con el tipo similar al que pide
 			}
 			contTipos--;
 		}
-		//printf("\n\n");
+
 		pokemonAuxiliar = nextMap(mapa);
 		if(pokemonAuxiliar == NULL) break;
 	}
 
 	if(existe == 0){
-		printf("\nEl tipo que ingreso no existe o no hay ningun pokemon de ese tipo\n");
+		printf("\nUsted no posee ningun Pokemon del tipo %s\n", tipoBuscado);
 	}
 
 }
@@ -628,14 +628,14 @@ void buscarPokemonNombre(HashMap * mapa)
 	{
 		if(strcmp(pokemonAuxiliar->nombrePokemon, nombreBuscado) == 0)
 		{
-			printf("\nNombre: %s Sexo: %s\n", pokemonAuxiliar->nombrePokemon, pokemonAuxiliar->sexo);
+			printf("\n%s ID: %i\n", pokemonAuxiliar->nombrePokemon, pokemonAuxiliar->ident.id);
+			printf("Sexo: %s \n", pokemonAuxiliar->sexo);
 			printf("Tipo(s): ");
 
 			for(int i = 0; i < pokemonAuxiliar->datos.cantidadTipos; i++)
 				printf("%s ", pokemonAuxiliar->datos.tipos[i]);
 
-			printf("\nID: %i Pokedex: %i\n", pokemonAuxiliar->ident.id, pokemonAuxiliar->ident.idPokedex);
-			printf("PS: %i PC: %i\n", pokemonAuxiliar->puntos.pSalud, pokemonAuxiliar->puntos.pCombate);
+			printf("\nPS: %i PC: %i\n", pokemonAuxiliar->puntos.pSalud, pokemonAuxiliar->puntos.pCombate);
 			existePokemon = 1;
 		}
 
@@ -666,18 +666,18 @@ void buscarPokemonPokedex(HashMap * mapa)
 	//De no ser el auxiliar NULL, se imprimen sus datos por pantalla
 	if(entrada != NULL)
 	{
-		printf("\nNombre: %s Numero Pokedex: %i\n", entrada->nombrePokemon, entrada->idents.idPokedex);
-		printf("Region: %sTipos: ", entrada->region);
+		printf("\n%i) %s\n", entrada->idents.idPokedex, entrada->nombrePokemon);
+		printf("Region: %s Tipos: ", entrada->region);
 
 		for(int i = 0; i < entrada->datos.cantidadTipos; i++)
-			printf("%s", entrada->datos.tipos[i]);
+			printf("%s ", entrada->datos.tipos[i]);
 
-		printf("\nEvolucion Previa: %s Evolucion Siguiente: %s", entrada->evol.evolPrevia,entrada->evol.evolSiguiente);
+		printf("\nEvolucion Previa: %s, Evolucion Siguiente: %s", entrada->evol.evolPrevia,entrada->evol.evolSiguiente);
 		printf("\nVeces Atrapado: %i\n", entrada->cantidadAtrapado);
 	}
 	else
 	{
-		printf("No se encuentra el pokemon ingresado.\n");
+		printf("\nNo posee informacion del pokemon %s\n", nombreBuscado);
 	}
 }
 
