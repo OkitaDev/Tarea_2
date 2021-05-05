@@ -106,7 +106,7 @@ void eraseMap(HashMap * map,  void * key)
 	{
 		if(is_equal_caracter(key, map->buckets[indice]->key))
 		{
-			printf("%s %s\n", key, map->buckets[indice]->key);
+			//printf("%s %s\n", key, map->buckets[indice]->key);
 			map->buckets[indice]->key = NULL;
 			map->buckets[indice] = NULL;
 			map->size--;

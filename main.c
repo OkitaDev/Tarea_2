@@ -54,13 +54,8 @@ int main()
                 mostrarPokemonsOrdenadosPC(mapaNombre);
                 break;
             case 9:
-<<<<<<< Updated upstream
                 if(size(mapaID) != 0) liberarPokemon(mapaNombre, mapaID, mapaPokedex);
                 else printf("\n No se ha liberado ningun Pokemon\n");
-=======
-                if(size(mapaID) != 0) liberarPokemon(mapaID);
-                else printf("\nPokemon no encontrado por su ID\n");
->>>>>>> Stashed changes
                 break;
             case 10:
                 mostrarPokemonRegion(mapaPokedex);
