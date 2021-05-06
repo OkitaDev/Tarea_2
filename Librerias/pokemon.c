@@ -748,60 +748,35 @@ void mostrarPokedex(HashMap * mapa)
 
 void mostrarPokemonsOrdenadosPC(HashMap * mapa)
 {
-	char espacio = ' ';
-	printf("%21cNAME PC\n",espacio);
+	tipoPokemon * arreglo[size(mapa)];
+    tipoPokemon * aux = firstMap(mapa);
+    int i = 0;
 
-	tipoPokemon *pok = firstMap(mapa);
-	int orden[200];
+    while(aux != NULL)
+    {
+        arreglo[i] = aux;
+        i++;
+        aux = nextMap(mapa);
+    }
 
-	int i = 0;
-	while(pok != NULL){
-		orden[i] = i+1;
-		i++;
-		pok = nextMap(mapa);
-	}
+    tipoPokemon * temp; //Variable temporal.
 
-	int j = size(mapa);
-	i = 0;
-	int aux = 0;
-	while(i < j){
-		pok=firstMap(mapa);
-		while(pok != NULL){
-			if(pok != NULL && pok->puntos.flag != 1){
-				if(pok->puntos.pCombate >= aux){
-					orden[i] = pok->puntos.pCombate;
-					aux = pok->puntos.pCombate;
-					//pok->puntos.flag = 1;
-					//printf("%d -> ",orden[k]);
-				}
-			}
-			pok = nextMap(mapa);
-		}
-		pok=firstMap(mapa);
-		while(pok != NULL){
-			if(orden[i] == pok->puntos.pCombate){
-				pok->puntos.flag = 1;
-				printf("%25s %d\n",pok->nombrePokemon,pok->puntos.pCombate);
-			}
-			pok = nextMap(mapa);
-		}
-		//printf("\n");
-		aux = 0;
-		i++;
-	}
+    for (i = 1; i < size(mapa);i++)
+    {
+    	for (int j = 0; j < size(mapa)-i ;j++) // for(j=0; j < size(mapa)-i; j++) es menor y no menor igual
+    	{
+    	    if (arreglo[j]->puntos.pCombate < arreglo[j+1]->puntos.pCombate)//Condicion mayor-menor
+    	    {
+            	temp = arreglo[j];
+            	arreglo[j] = arreglo[j+1];
+            	arreglo[j+1] = temp;
+            }
+        }
+    }
 
-	/*
-	printf("RESULTADOS: \n");
-	pok = firstMap(mapa);
-	i=0;
-	while(pok != NULL){
-		printf("%d\n",orden[i]);
-		pok = nextMap(mapa);
-		i++;
-	}
-	*/
-
-	
+	printf("\nID NOMBRE  PC\n");
+    for(i = 0; i < size(mapa); i++)
+        printf("%i %s %i\n", arreglo[i]->ident.id, arreglo[i]->nombrePokemon, arreglo[i]->puntos.pCombate);
 	
 }
 

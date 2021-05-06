@@ -24,7 +24,7 @@ int main()
                 mostrarSeleccion();
                 opcion = ingresarOpcion(1);
                 if(opcion == 1) importarArchivo(mapaNombre, mapaID, mapaPokedex);
-                else if(opcion == 2) exportarArchivo(mapaID);
+                else if(opcion == 2) exportarArchivo(mapaNombre);
                 else printf("\nNo hizo nada\n");
                 break;
             case 2:
@@ -32,11 +32,12 @@ int main()
                 else printf("\nHa superado el maximo de Pokemons!\n");
                 break;
             case 3:
-                if(size(mapaID) < 100) evolucionarPokemon(mapaID, mapaPokedex);
-                else printf("\nHa superado el maximo de Pokemons!\n");
+                if(size(mapaID) != 0) evolucionarPokemon(mapaID, mapaPokedex);
+                else printf("\nNo ha atrapado a ningun Pokemon\n");
                 break;
             case 4:
-                busquedaPorTipo(mapaNombre);
+                if(size(mapaID) != 0) busquedaPorTipo(mapaNombre);
+                else printf("\nNo ha atrapado a ningun Pokemon\n");
                 break;
             case 5:
                 if(size(mapaNombre) != 0) buscarPokemonNombre(mapaNombre);
@@ -51,14 +52,16 @@ int main()
                 else printf("\nNo ha atrapado a ningun Pokemon\n");
                 break;
             case 8:
-                mostrarPokemonsOrdenadosPC(mapaNombre);
+                if(size(mapaNombre) != 0) mostrarPokemonsOrdenadosPC(mapaNombre);
+                else printf("\nNo ha atrapado a ningun Pokemon\n");                
                 break;
             case 9:
                 if(size(mapaID) != 0) liberarPokemon(mapaNombre, mapaID, mapaPokedex);
-                else printf("\n No se ha liberado ningun Pokemon\n");
+                else printf("\nNo hay pokemon para liberar\n");
                 break;
             case 10:
-                mostrarPokemonRegion(mapaPokedex);
+                if(size(mapaPokedex) != 0) mostrarPokemonRegion(mapaPokedex);
+                else printf("\nNo ha atrapado a ningun Pokemon\n");
                 break;
         }
         opcion = 1;
