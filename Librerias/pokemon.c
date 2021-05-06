@@ -29,6 +29,7 @@ typedef struct tipoPuntos
 {
 	int pSalud;
 	int pCombate;
+	short flag;
 }tipoPuntos;
 
 typedef struct tipoPokemon
@@ -747,7 +748,61 @@ void mostrarPokedex(HashMap * mapa)
 
 void mostrarPokemonsOrdenadosPC(HashMap * mapa)
 {
-//brayintan
+	char espacio = ' ';
+	printf("%21cNAME PC\n",espacio);
+
+	tipoPokemon *pok = firstMap(mapa);
+	int orden[200];
+
+	int i = 0;
+	while(pok != NULL){
+		orden[i] = i+1;
+		i++;
+		pok = nextMap(mapa);
+	}
+
+	int j = size(mapa);
+	i = 0;
+	int aux = 0;
+	while(i < j){
+		pok=firstMap(mapa);
+		while(pok != NULL){
+			if(pok != NULL && pok->puntos.flag != 1){
+				if(pok->puntos.pCombate >= aux){
+					orden[i] = pok->puntos.pCombate;
+					aux = pok->puntos.pCombate;
+					//pok->puntos.flag = 1;
+					//printf("%d -> ",orden[k]);
+				}
+			}
+			pok = nextMap(mapa);
+		}
+		pok=firstMap(mapa);
+		while(pok != NULL){
+			if(orden[i] == pok->puntos.pCombate){
+				pok->puntos.flag = 1;
+				printf("%25s %d\n",pok->nombrePokemon,pok->puntos.pCombate);
+			}
+			pok = nextMap(mapa);
+		}
+		//printf("\n");
+		aux = 0;
+		i++;
+	}
+
+	/*
+	printf("RESULTADOS: \n");
+	pok = firstMap(mapa);
+	i=0;
+	while(pok != NULL){
+		printf("%d\n",orden[i]);
+		pok = nextMap(mapa);
+		i++;
+	}
+	*/
+
+	
+	
 }
 
 //Al liberar un pokemon se tiene que eliminar del almacenamiento pero no de la pokedex
