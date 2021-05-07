@@ -8,7 +8,7 @@ void importarArchivo(HashMap *, HashMap *, HashMap *);
 void exportarArchivo(HashMap *);
 
 //Funcion para ingresar un pokemon al PC
-void atraparPokemon(HashMap *, HashMap *, HashMap *);
+void registrarPokemon(HashMap *, HashMap *, HashMap *);
 
 /*Funcion para evolucionar a 1 pokemon, buscandolo
 a través de su ID*/

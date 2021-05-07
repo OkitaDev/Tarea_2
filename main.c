@@ -24,53 +24,52 @@ int main()
                 mostrarSeleccion();
                 opcion = ingresarOpcion(1);
                 if(opcion == 1) importarArchivo(mapaNombre, mapaID, mapaPokedex);
-                else if(opcion == 2) exportarArchivo(mapaNombre);
-                else printf("\nNo hizo nada\n");
+                else if(opcion == 2) exportarArchivo(mapaID);
+                else printf(blue"\nNo hizo nada\n"reset);
                 break;
             case 2:
-                if(size(mapaNombre) < 100)atraparPokemon(mapaNombre, mapaID, mapaPokedex);
-                else printf("\nHa superado el maximo de Pokemons!\n");
+                if(size(mapaNombre) < 100) registrarPokemon(mapaNombre, mapaID, mapaPokedex);
+                else printf(red"\nHa superado el maximo de Pokemons!\n"reset);
                 break;
             case 3:
                 if(size(mapaID) != 0) evolucionarPokemon(mapaID, mapaPokedex);
-                else printf("\nNo ha atrapado a ningun Pokemon\n");
+                else printf(red"\nNo ha atrapado a ningun Pokemon\n"reset);
                 break;
             case 4:
                 if(size(mapaID) != 0) busquedaPorTipo(mapaNombre);
-                else printf("\nNo ha atrapado a ningun Pokemon\n");
+                else printf(red"\nNo ha atrapado a ningun Pokemon\n"reset);
                 break;
             case 5:
                 if(size(mapaNombre) != 0) buscarPokemonNombre(mapaNombre);
-                else printf("\nNo ha atrapado a ningun Pokemon\n");
+                else printf(red"\nNo ha atrapado a ningun Pokemon\n"reset);
                 break;
             case 6:
                 if(size(mapaPokedex) != 0) buscarPokemonPokedex(mapaPokedex);
-                else printf("\nPokemon no encontrado\n");
+                else printf(red"\nNo ha atrapado a ningun Pokemon\n"reset);
                 break;
             case 7:
                 if(size(mapaPokedex) != 0) mostrarPokedex(mapaPokedex);
-                else printf("\nNo ha atrapado a ningun Pokemon\n");
+                else printf(red"\nNo ha atrapado a ningun Pokemon\n"reset);
                 break;
             case 8:
                 if(size(mapaNombre) != 0) mostrarPokemonsOrdenadosPC(mapaNombre);
-                else printf("\nNo ha atrapado a ningun Pokemon\n");                
+                else printf(red"\nNo ha atrapado a ningun Pokemon\n"reset);               
                 break;
             case 9:
                 if(size(mapaID) != 0) liberarPokemon(mapaNombre, mapaID, mapaPokedex);
-                else printf("\nNo hay pokemon para liberar\n");
+                else printf(red"\nNo posee pokemons para liberar\n"reset);
                 break;
             case 10:
                 if(size(mapaPokedex) != 0) mostrarPokemonRegion(mapaPokedex);
-                else printf("\nNo ha atrapado a ningun Pokemon\n");
+                else printf(red"\nNo ha atrapado a ningun Pokemon\n"reset);
                 break;
         }
         opcion = 1;
-        printf("\n");
     } while (opcion != 0);
 
-    printf("\n -----\n");
+    printf(yellow"\n -----\n");
     printf("| FIN |\n");
-    printf(" -----\n\n");
+    printf(" -----\n\n"reset);
 
     //Liberacion de memoria
     free(mapaNombre);

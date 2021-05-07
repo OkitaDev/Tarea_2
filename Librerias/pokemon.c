@@ -57,6 +57,7 @@ typedef struct tipoPokedex
 pokemon en un arreglo de cadenas*/
 void ingresoDeTipos(tipoPokemon * pokemon)
 {
+	//Inicializacion de variables
 	char tipo[25];
 	int i = 0;
 
@@ -73,9 +74,9 @@ void ingresoDeTipos(tipoPokemon * pokemon)
 
 		if(i == 0 && strcmp(tipo, "No") == 0) //Obligar a colocar 1 tipo
 		{
-			printf("\nEl pokemon debe tener al menos 1 tipo\n");
+			printf(red "\nEl pokemon debe tener al menos 1 tipo\n" reset);
 		}
-		else
+		else //Almacenar el valor, y cuando tenga 1 tipo, se puede ingresar no
 		{
 			if(strcmp("No", tipo) == 0) break;
 			strcat(tipo, " ");
@@ -117,8 +118,8 @@ short idPokedexCorrecto(HashMap * mapa, tipoPokemon * pokemon)
 		//Comparar si el numero de la pokedex es el mismo o no
 		if(auxPokedex->idents.idPokedex != pokemon->ident.idPokedex)
 		{
-			printf("\nEl pokemon %s con el ID %i, posee su ID Pokedex erroneo\n",pokemon->nombrePokemon, pokemon->ident.id);
-			printf("Por lo tanto no se ingresara a la Pokedex o al PC\n");
+			printf(red"\nEl pokemon %s con el ID %i, posee su ID Pokedex erroneo\n",pokemon->nombrePokemon, pokemon->ident.id);
+			printf("Por lo tanto no se ingresara a la Pokedex o al PC\n"reset);
 			return 1;
 		}
 	}
@@ -148,8 +149,8 @@ void idOcupado(HashMap * mapa, tipoPokemon * pokemon)
 			if(aux == NULL) break;
 		}
 
-		printf("\nEl pokemon %s debera cambiar su ID %i\n", pokemon->nombrePokemon,id);
-		printf("Su nuevo ID es %i\n", pokemon->ident.id);
+		printf(blue"\nEl pokemon %s debera cambiar su ID %i\n", pokemon->nombrePokemon,id);
+		printf("Su nuevo ID es %i\n"reset, pokemon->ident.id);
 	}
 }
 
@@ -307,7 +308,7 @@ void importarArchivo(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPoked
 	//Si no se encuentra el archivo, no se ingresa nada
 	if(archivo == NULL)
 	{
-		printf("\nArchivo NO IMPORTADO!\n");
+		printf(red"\nArchivo NO IMPORTADO!\n"reset);
 		return;
 	}
 
@@ -322,8 +323,8 @@ void importarArchivo(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPoked
 		//If por si hay mas de 100 pokemon
 		if(size(mapaNombre) >= 100)
 		{
-			printf("\nHa superado el maximo de Pokemons\n");
-			printf("Se ha podido algunos implementar pokemons!\n");
+			printf(blue"\nHa superado el maximo de Pokemons\n");
+			printf("Se ha podido algunos implementar pokemons!\n"reset);
 			break;
 		}
 
@@ -331,7 +332,7 @@ void importarArchivo(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPoked
 		lecturaDeInformacion(mapaNombre, mapaID, mapaPokedex,lineaLeida);
 	}
 
-	printf("\nArchivo IMPORTADO!\n");
+	printf(green"\nArchivo IMPORTADO!\n"reset);
 	fclose(archivo);
 }
 
@@ -343,7 +344,7 @@ void exportarArchivo(HashMap * mapa)
 	no se exportara nada*/
 	if(size(mapa) == 0)
 	{
-		printf("\nNo ha atrapado ningun Pokemon\n");
+		printf(red "\nNo ha atrapado ningun Pokemon\n" reset);
 		return;
 	}
 
@@ -360,7 +361,7 @@ void exportarArchivo(HashMap * mapa)
 	//Si no se puede crear o modificar el archivo, se retorna termina
 	if(archivo == NULL)
 	{
-		printf("\nArchivo NO EXPORTADO!\n");
+		printf(red "\nArchivo NO EXPORTADO!\n" reset);
 		return;
 	}
 
@@ -397,13 +398,13 @@ void exportarArchivo(HashMap * mapa)
 		auxPokemon = nextMap(mapa);
 	}
 
-	printf("\nArchivo EXPORTADO!\n");
+	printf(green "\nArchivo EXPORTADO!\n" reset);
 	fclose(archivo);
 }
 
 /* Funcion para ingresar la informacion de 1
 nuevo pokemon*/
-void atraparPokemon(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPokedex)
+void registrarPokemon(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPokedex)
 {
 	//Creacion de variables a usar
 	tipoPokemon * pokemonAtrapado = (tipoPokemon *) malloc (sizeof(tipoPokemon));
@@ -473,6 +474,8 @@ void atraparPokemon(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPokede
 	//Ingreso al mapa
 	insertMap(mapaNombre, pokemonAtrapado->nombrePokemon, pokemonAtrapado);
 	insertMap(mapaID, & pokemonAtrapado->ident.id, pokemonAtrapado);
+
+	printf(green"\nPokemon ingresado correctamente\n"reset);
 }
 
 void evolucionarPokemon(HashMap * mapaID, HashMap * mapaPokedex)
@@ -547,17 +550,18 @@ void evolucionarPokemon(HashMap * mapaID, HashMap * mapaPokedex)
 			}
 
 			//Muestra de informacion
+			printf(green"\nPokemon Evolucionado!\n"reset);
 			printf("\nNombre: %s\n", auxPokemon->nombrePokemon);
 			printf("PS: %i PC: %i\n", auxPokemon->puntos.pSalud, auxPokemon->puntos.pCombate);
 		}
 		else
 		{
-			printf("\nEl Pokemon %s no posee evolucion\n", auxPokemon->nombrePokemon);
+			printf(blue"\nEl Pokemon %s no posee evolucion\n"reset, auxPokemon->nombrePokemon);
 		}
 	}
 	else
 	{
-		printf("\nNo hay pokemon asociado al ID %i\n", idBuscado);
+		printf(red"\nNo hay pokemon asociado al ID %i\n"reset, idBuscado);
 	}
 }
 
@@ -583,6 +587,7 @@ void busquedaPorTipo(HashMap * mapa)
 		{
 			if(strcmp(pokemonAuxiliar->datos.tipos[contTipos], tipoBuscado) == 0)
 			{
+				if(existe == 0) printf(green"\nTodos los Pokemons de tipo %s:\n"reset, tipoBuscado);
 				printf("\n%s ID: %d \nTipo(s): ",pokemonAuxiliar->nombrePokemon, pokemonAuxiliar->ident.id);
 				
 				for(int i = 0; i < pokemonAuxiliar->datos.cantidadTipos; i++)
@@ -599,10 +604,10 @@ void busquedaPorTipo(HashMap * mapa)
 		if(pokemonAuxiliar == NULL) break;
 	}
 
-	if(existe == 0){
-		printf("\nUsted no posee ningun Pokemon del tipo %s\n", tipoBuscado);
+	if(existe == 0)
+	{
+		printf(red"\nUsted no posee ningun Pokemon del tipo %s\n"reset, tipoBuscado);
 	}
-
 }
 
 /* Buscar a todos los pokemon con el mismo nombre
@@ -629,6 +634,7 @@ void buscarPokemonNombre(HashMap * mapa)
 	{
 		if(strcmp(pokemonAuxiliar->nombrePokemon, nombreBuscado) == 0)
 		{
+			if(existePokemon == 0) printf(green "\nTodos los %s en su PC:\n" reset, nombreBuscado);
 			printf("\n%s ID: %i\n", pokemonAuxiliar->nombrePokemon, pokemonAuxiliar->ident.id);
 			printf("Sexo: %s \n", pokemonAuxiliar->sexo);
 			printf("Tipo(s): ");
@@ -645,7 +651,7 @@ void buscarPokemonNombre(HashMap * mapa)
 	}
 
 	//Si no se encuentra, se indica que no existe
-	if(existePokemon == 0) printf("\nNo ha atrapado %s\n", nombreBuscado);
+	if(existePokemon == 0) printf(red"\nNo ha atrapado %s\n"reset, nombreBuscado);
 }
 
 /* Buscar la informacion de un pokemon registrado 
@@ -667,6 +673,7 @@ void buscarPokemonPokedex(HashMap * mapa)
 	//De no ser el auxiliar NULL, se imprimen sus datos por pantalla
 	if(entrada != NULL)
 	{
+		printf(green"\nEntrada de Pokedex Encontrada!\n"reset);
 		printf("\n%i) %s\n", entrada->idents.idPokedex, entrada->nombrePokemon);
 		printf("Region: %s Tipos: ", entrada->region);
 
@@ -678,7 +685,7 @@ void buscarPokemonPokedex(HashMap * mapa)
 	}
 	else
 	{
-		printf("\nNo posee informacion del pokemon %s\n", nombreBuscado);
+		printf(red"\nNo posee informacion del pokemon %s\n"reset, nombreBuscado);
 	}
 }
 
@@ -763,9 +770,9 @@ void mostrarPokemonsOrdenadosPC(HashMap * mapa)
 
     for (i = 1; i < size(mapa);i++)
     {
-    	for (int j = 0; j < size(mapa)-i ;j++) // for(j=0; j < size(mapa)-i; j++) es menor y no menor igual
+    	for (int j = 0; j < size(mapa)-i ;j++) 
     	{
-    	    if (arreglo[j]->puntos.pCombate < arreglo[j+1]->puntos.pCombate)//Condicion mayor-menor
+    	    if (arreglo[j]->puntos.pCombate < arreglo[j+1]->puntos.pCombate)
     	    {
             	temp = arreglo[j];
             	arreglo[j] = arreglo[j+1];
@@ -776,41 +783,36 @@ void mostrarPokemonsOrdenadosPC(HashMap * mapa)
 
 	printf("\nID NOMBRE  PC\n");
     for(i = 0; i < size(mapa); i++)
-        printf("%i %s %i\n", arreglo[i]->ident.id, arreglo[i]->nombrePokemon, arreglo[i]->puntos.pCombate);
-	
+        printf("%i %s %i\n", arreglo[i]->ident.id, arreglo[i]->nombrePokemon, arreglo[i]->puntos.pCombate);	
 }
 
-//Al liberar un pokemon se tiene que eliminar del almacenamiento pero no de la pokedex
+//Al liberar un pokemon se tiene que eliminar del almacenamiento, pero no de la pokedex
 void liberarPokemon(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPokedex)
 {
 	tipoPokemon * poke;
-
 	int eliminado;
 	
 	printf("\nLiberar Pokemon\n");
 	printf("Que pokemon desea liberar?\n");
 	
 	getchar();
-
 	fscanf(stdin,"%i" , &eliminado);
 
 	poke = searchMap(mapaID, &eliminado);
         
- 	if (poke != NULL){
-    
+ 	if (poke != NULL)
+ 	{
 		tipoPokedex * auxPoke = searchMap(mapaPokedex,poke->nombrePokemon);
-    
 		auxPoke->cantidadAtrapado--;
 	
-		eraseMap(mapaNombre, poke->nombrePokemon);
-     
+		eraseMap(mapaNombre, poke->nombrePokemon); 
 		eraseMap(mapaID, &poke->ident.id);
 	
-		printf("\nEl pokemon fue liberado existosamente menos de mapanombre\n");
-	}else{
-
-	printf("\nEl pokemon no se encontro\n");
-
+		printf(green"\nEl pokemon fue liberado existosamente!\n"reset);
+	}
+	else
+	{
+		printf(red"\nEl ID %i no se encuentra asociado a algun pokemon\n"reset, eliminado);
     }
 }
 
@@ -824,7 +826,7 @@ void mostrarPokemonRegion(HashMap * mapa)
 	fscanf(stdin,"%24s",regionBuscada);
 	convertirEstandar(regionBuscada);
 	
-	printf("\nPokemons pertenecientes a %s:\n",regionBuscada);
+	printf(green "\nPokemons pertenecientes a %s:\n" reset,regionBuscada);
 	
 	do
 	{
@@ -852,5 +854,4 @@ void mostrarPokemonRegion(HashMap * mapa)
 		pokemon = nextMap(mapa);
 
 	}while(pokemon != NULL);
-
 }

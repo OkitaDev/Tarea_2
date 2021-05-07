@@ -2,12 +2,18 @@
 #include <string.h>
 #include <ctype.h>
 
+#define green "\e[1;92m"
+#define red "\e[1;91m"
+#define blue "\e[1;94m"
+#define yellow "\e[1;93m"
+#define reset "\e[0m" 
+
 //Muestra el menu
 void mostrarMenuPokedex()
 {
-    printf("\n ---------\n");
+    printf(yellow"\n ---------\n");
     printf("| POKEDEX |\n");
-    printf(" ---------\n\n");
+    printf(" ---------\n\n"reset);
 
     printf("1. Importar/Exportar desde archivo .csv\n");
     printf("2. Registrar Pokemon Atrapado\n");
@@ -40,7 +46,7 @@ short ingresarOpcion(short pregunta)
         {
             printf("\nElija una opcion: ");
             scanf("%hi", &opcion);
-            if(opcion < 0 || opcion > 11) printf("\nNo existe tal opcion\n");
+            if(opcion < 0 || opcion > 11) printf(red "\nNo existe tal opcion\n" reset);
         } while (opcion < 0 || opcion > 11);
     }
     else
@@ -49,7 +55,7 @@ short ingresarOpcion(short pregunta)
         {
             printf("\nElija una opcion: ");
             scanf("%hi", &opcion);
-            if(opcion < 0 || opcion > 2) printf("\nNo existe tal opcion\n");
+            if(opcion < 0 || opcion > 2) printf(red "\nNo existe tal opcion\n" reset);
         } while (opcion < 0 || opcion > 2);
     }
 
@@ -86,7 +92,7 @@ void validarSexo(char * sexo)
         //Mensaje si no se cumple
         if(strcmp(sexo, "Macho") != 0 && strcmp(sexo, "Hembra") != 0 && strcmp(sexo, "No tiene") != 0)
         {    
-            printf("\nPor favor, ingrese %cMacho%c, %cHembra%c o %cNo tiene%c\n", 34, 34, 34, 34, 34, 34);
+            printf(red "\nPor favor, ingrese %cMacho%c, %cHembra%c o %cNo tiene%c\n"reset, 34, 34, 34, 34, 34, 34);
         }
 
     } while (strcmp(sexo, "Macho") != 0 && strcmp(sexo, "Hembra") != 0 && strcmp(sexo, "No tiene") != 0);
