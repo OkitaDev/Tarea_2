@@ -40,7 +40,7 @@ void mostrarSeleccion()
 short ingresarOpcion(short pregunta)
 {
     short opcion;
-    if(pregunta == 0)
+    if(pregunta == 0) //Menu Grande
     {
         do
         {
@@ -49,7 +49,7 @@ short ingresarOpcion(short pregunta)
             if(opcion < 0 || opcion > 11) printf(red "\nNo existe tal opcion\n" reset);
         } while (opcion < 0 || opcion > 11);
     }
-    else
+    else //Submenu opcion 1
     {
         do
         {

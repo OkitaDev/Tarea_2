@@ -8,6 +8,8 @@
 int main()
 {
     short opcion;
+
+    //Inicializacion de Mapas
     HashMap * mapaNombre = createMap(10);
     HashMap * mapaID = createMap(10);
     HashMap * mapaPokedex = createMap(10);
@@ -15,7 +17,7 @@ int main()
     do
     {
         mostrarMenuPokedex();
-        opcion = ingresarOpcion(0);
+        opcion = ingresarOpcion(0); //Ingreso de la opcion
         if(opcion == 0) break;
 
         switch(opcion)
