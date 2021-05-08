@@ -788,29 +788,33 @@ void mostrarPokemonsOrdenadosPC(HashMap * mapaNombre)
 //Al liberar un pokemon se tiene que eliminar del almacenamiento, pero no de la pokedex
 void liberarPokemon(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPokedex)
 {
+	//se crea variable con el tipoPokemon y int representa la ID del elimainado
 	tipoPokemon * poke;
 	int eliminado;
-	
+	//lo que muestra la funcion por pantalla al momento de seleccionarla
 	printf("\nLiberar Pokemon\n");
 	printf("Que pokemon desea liberar?\n");
-	
+	//se utiliza el getchar para limpiar la basura del tecladp
 	getchar();
+	//se lee la varible pedida al usuario
 	fscanf(stdin,"%i" , &eliminado);
-
+	//se inicializa el mapa para buscar dicha ID
 	poke = searchMap(mapaID, &eliminado);
-        
+        //se pregunta si poke "existe", diciendo si es distinto de nulo
  	if (poke != NULL)
  	{
+		 //se crea un aux para buscar dentro de los mapas
 		tipoPokedex * auxPoke = searchMap(mapaPokedex,poke->nombrePokemon);
 		auxPoke->cantidadAtrapado--;
-	
+		//se utiliza la funcion erase par borra de los mapas nombre y id pero no de pokedex
 		eraseMap(mapaNombre, poke->nombrePokemon); 
 		eraseMap(mapaID, &poke->ident.id);
-	
+		//se manda el mensaje de confirmaciond e que si fue eliminado
 		printf(green"\nEl pokemon fue liberado existosamente!\n"reset);
 	}
 	else
 	{
+		//si el id no se encontro retornaria diciendo que no se encontro asociado
 		printf(red"\nEl ID %i no se encuentra asociado a algun pokemon\n"reset, eliminado);
     }
 }
