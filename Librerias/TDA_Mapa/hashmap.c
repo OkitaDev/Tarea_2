@@ -100,25 +100,19 @@ HashMap * createMap(long capacity)
 
 void eraseMap(HashMap * map,  void * key)
 {
-	long indice = hashCaracter(key, map->capacity);
+    long idx = hashCaracter(key, map->capacity);
+    while (map->buckets[idx] != NULL && is_equal_caracter(map->buckets[idx]->key, key) == 0)
+        idx = (idx + 1) % map->capacity;
+    
+    if (map->buckets[idx] == NULL) return;
 
-	while(map->buckets[indice] != NULL)
-	{
-		if(is_equal_caracter(key, map->buckets[indice]->key))
-		{
-			//printf("%s %s\n", key, map->buckets[indice]->key);
-			map->buckets[indice]->key = NULL;
-			map->buckets[indice] = NULL;
-			map->size--;
-			return;
-		}
+    map->buckets[idx]->key = NULL;
 
-		indice++;
-		indice %= map->capacity;
-	}
+    map->size--;
 }
 
-void * searchMap(HashMap * map,  void * key) {
+void * searchMap(HashMap * map,  void * key) 
+{
 	long indice = hashCaracter(key, map->capacity);
 
 	while(map->buckets[indice] != NULL)
