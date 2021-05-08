@@ -788,34 +788,39 @@ void mostrarPokemonsOrdenadosPC(HashMap * mapaNombre)
 //Al liberar un pokemon se tiene que eliminar del almacenamiento, pero no de la pokedex
 void liberarPokemon(HashMap * mapaNombre, HashMap * mapaID, HashMap * mapaPokedex)
 {
-	//se crea variable con el tipoPokemon y int representa la ID del elimainado
-	tipoPokemon * poke;
-	int eliminado;
+	//se crea variable con el tipoPokemon y int representa la ID del pokemon a buscar
+	tipoPokemon * auxiliarPokemon;
+	int idBuscado;
+
 	//lo que muestra la funcion por pantalla al momento de seleccionarla
-	printf("\nLiberar Pokemon\n");
-	printf("Que pokemon desea liberar?\n");
-	//se utiliza el getchar para limpiar la basura del tecladp
+	printf("\nIngrese el ID del pokemon que desea liberar: ");
+
+	//se utiliza el getchar para limpiar la basura del teclado
 	getchar();
 	//se lee la varible pedida al usuario
-	fscanf(stdin,"%i" , &eliminado);
+	fscanf(stdin,"%i" , &idBuscado);
+
 	//se inicializa el mapa para buscar dicha ID
-	poke = searchMap(mapaID, &eliminado);
-        //se pregunta si poke "existe", diciendo si es distinto de nulo
- 	if (poke != NULL)
+	auxiliarPokemon = searchMap(mapaID, &idBuscado);
+
+    //se pregunta si auxiliarPokemon "existe", diciendo si es distinto de nulo
+ 	if (auxiliarPokemon != NULL)
  	{
-		 //se crea un aux para buscar dentro de los mapas
-		tipoPokedex * auxPoke = searchMap(mapaPokedex,poke->nombrePokemon);
-		auxPoke->cantidadAtrapado--;
-		//se utiliza la funcion erase par borra de los mapas nombre y id pero no de pokedex
-		eraseMap(mapaNombre, poke->nombrePokemon); 
-		eraseMap(mapaID, &poke->ident.id);
-		//se manda el mensaje de confirmaciond e que si fue eliminado
+		//se crea la variable tipoPokedex para reducir la cantidad de pokemon atrapados en 1
+		tipoPokedex * entradaAuxiliar = searchMap(mapaPokedex,auxiliarPokemon->nombrePokemon);
+		entradaAuxiliar->cantidadAtrapado--;
+
+		//Se utiliza la funcion eraseMap para eliminar la informacion de los mapa nombre e ID.
+		eraseMap(mapaNombre, auxiliarPokemon->nombrePokemon); 
+		eraseMap(mapaID, &auxiliarPokemon->ident.id);
+
+		//se imprime el mensaje de confirmacion de que si fue eliminado
 		printf(green"\nEl pokemon fue liberado existosamente!\n"reset);
 	}
 	else
 	{
-		//si el id no se encontro retornaria diciendo que no se encontro asociado
-		printf(red"\nEl ID %i no se encuentra asociado a algun pokemon\n"reset, eliminado);
+		//si el id no se encontro, se imprime el mensaje diciendo que no se encontro.
+		printf(red"\nEl ID %i no se encuentra asociado a algun pokemon\n"reset, idBuscado);
     }
 }
 
