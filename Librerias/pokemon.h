@@ -2,13 +2,13 @@
 #define POKEMON_H
 
 //Funcion para importar un archivo.csv
-void importarArchivo(HashMap *, HashMap *, HashMap *);
+void importarArchivo(HashMap *, HashMap *);
 
 //Funcion para exportar un archivo.csv
 void exportarArchivo(HashMap *);
 
 //Funcion para ingresar un pokemon al PC
-void registrarPokemon(HashMap *, HashMap *, HashMap *);
+void registrarPokemon(HashMap *, HashMap *);
 
 /*Funcion para evolucionar a 1 pokemon, buscandolo
 a través de su ID*/
@@ -31,7 +31,7 @@ posee mayor PC al que tiene menor PC*/
 void mostrarPokemonsOrdenadosPC(HashMap *);
 
 //Funcion para liberar 1 pokemon a través de su ID
-void liberarPokemon(HashMap *, HashMap *, HashMap * );
+void liberarPokemon(HashMap *, HashMap * );
 
 //Mostrar todos los pokemons de una region
 void mostrarPokemonRegion(HashMap *);

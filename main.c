@@ -10,7 +10,6 @@ int main()
     short opcion;
 
     //Inicializacion de Mapas
-    HashMap * mapaNombre = createMap(10);
     HashMap * mapaID = createMap(10);
     HashMap * mapaPokedex = createMap(10);
 
@@ -25,12 +24,12 @@ int main()
             case 1:
                 mostrarSeleccion();
                 opcion = ingresarOpcion(1);
-                if(opcion == 1) importarArchivo(mapaNombre, mapaID, mapaPokedex);
+                if(opcion == 1) importarArchivo(mapaID, mapaPokedex);
                 else if(opcion == 2) exportarArchivo(mapaID);
                 else printf(blue"\nNo hizo nada\n"reset);
                 break;
             case 2:
-                if(size(mapaNombre) < 100) registrarPokemon(mapaNombre, mapaID, mapaPokedex);
+                if(size(mapaID) < 100) registrarPokemon(mapaID, mapaPokedex);
                 else printf(red"\nHa superado el maximo de Pokemons!\n"reset);
                 break;
             case 3:
@@ -38,11 +37,11 @@ int main()
                 else printf(red"\nNo ha atrapado a ningun Pokemon\n"reset);
                 break;
             case 4:
-                if(size(mapaID) != 0) busquedaPorTipo(mapaNombre);
+                if(size(mapaID) != 0) busquedaPorTipo(mapaID);
                 else printf(red"\nNo ha atrapado a ningun Pokemon\n"reset);
                 break;
             case 5:
-                if(size(mapaNombre) != 0) buscarPokemonNombre(mapaNombre);
+                if(size(mapaID) != 0) buscarPokemonNombre(mapaID);
                 else printf(red"\nNo ha atrapado a ningun Pokemon\n"reset);
                 break;
             case 6:
@@ -54,11 +53,11 @@ int main()
                 else printf(red"\nNo ha atrapado a ningun Pokemon\n"reset);
                 break;
             case 8:
-                if(size(mapaNombre) != 0) mostrarPokemonsOrdenadosPC(mapaNombre);
+                if(size(mapaID) != 0) mostrarPokemonsOrdenadosPC(mapaID);
                 else printf(red"\nNo ha atrapado a ningun Pokemon\n"reset);               
                 break;
             case 9:
-                if(size(mapaID) != 0) liberarPokemon(mapaNombre, mapaID, mapaPokedex);
+                if(size(mapaID) != 0) liberarPokemon(mapaID, mapaPokedex);
                 else printf(red"\nNo posee pokemons para liberar\n"reset);
                 break;
             case 10:
@@ -74,7 +73,6 @@ int main()
     printf(" -----\n\n"reset);
 
     //Liberacion de memoria
-    free(mapaNombre);
     free(mapaID);
     free(mapaPokedex);
 

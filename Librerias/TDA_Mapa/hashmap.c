@@ -31,7 +31,7 @@ Pair * createPair(void * key,  void * value)
     return new;
 }
 
-long hashCaracter( char * key, long capacity)
+long hash( char * key, long capacity)
 {
     unsigned long hash = 0;
     char * ptr;
@@ -42,7 +42,7 @@ long hashCaracter( char * key, long capacity)
     return hash%capacity;
 }
 
-int is_equal_caracter(void* key1, void* key2)
+int is_equal(void* key1, void* key2)
 {
     if(key1 == NULL || key2 == NULL) return 0;
     if(strcmp((char*)key1,(char*)key2) == 0) return 1;
@@ -53,7 +53,7 @@ int is_equal_caracter(void* key1, void* key2)
 void insertMap(HashMap * map, void * key, void * value)
 {
 	if(round(map->capacity * 0.7) == map->size) enlarge(map);
-	long indice = hashCaracter(key, map->capacity);
+	long indice = hash(key, map->capacity);
 	
 
 	while(map->buckets[indice] != NULL && map->buckets[indice]->key != 0)
@@ -100,8 +100,8 @@ HashMap * createMap(long capacity)
 
 void eraseMap(HashMap * map,  void * key)
 {
-    long idx = hashCaracter(key, map->capacity);
-    while (map->buckets[idx] != NULL && is_equal_caracter(map->buckets[idx]->key, key) == 0)
+    long idx = hash(key, map->capacity);
+    while (map->buckets[idx] != NULL && is_equal(map->buckets[idx]->key, key) == 0)
         idx = (idx + 1) % map->capacity;
     
     if (map->buckets[idx] == NULL) return;
@@ -113,11 +113,11 @@ void eraseMap(HashMap * map,  void * key)
 
 void * searchMap(HashMap * map,  void * key) 
 {
-	long indice = hashCaracter(key, map->capacity);
+	long indice = hash(key, map->capacity);
 
 	while(map->buckets[indice] != NULL)
 	{
-		if(is_equal_caracter(map->buckets[indice]->key, key))
+		if(is_equal(map->buckets[indice]->key, key))
 		{
 			map->current = indice;
 			return map->buckets[indice]->value;
@@ -135,15 +135,11 @@ void * firstMap(HashMap * map)
 
 	while(indice < map->capacity)
 	{
-		if(map->buckets[indice] != NULL){
-			if(map->buckets[indice]->key != NULL){
-				break;
-			}
-		}
+		if(map->buckets[indice] != NULL)
+			if(map->buckets[indice]->key != NULL) break;
+		
 		indice++;
-		if(indice == map->capacity){
-			return NULL;
-		}
+		if(indice == map->capacity) return NULL;
 	}
 
 	if(map->buckets[0] != NULL) indice = 0;
@@ -158,8 +154,11 @@ void * nextMap(HashMap * map)
 	{
 		if(map->buckets[i] != NULL)
 		{
-			map->current = i;
-			return map->buckets[i]->value;
+			if(map->buckets[i]->key != NULL)
+			{
+				map->current = i;
+				return map->buckets[i]->value;
+			}
 		}
 	}
 	return NULL;
@@ -169,4 +168,3 @@ long size (HashMap * map)
 {
 	return map->size;
 }
-
