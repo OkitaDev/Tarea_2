@@ -815,7 +815,6 @@ void liberarPokemon(HashMap * mapaID, HashMap * mapaPokedex)
 
 		//Se utiliza la funcion eraseMap para eliminar la informacion de los mapa nombre e ID.
 		eraseMap(mapaID, &idBuscado);
-		printf("\nauxiliarPokemon: %i %i\n",auxiliarPokemon->ident.id, idBuscado);
 
 		//se imprime el mensaje de confirmacion de que si fue eliminado
 		printf(green"\nEl pokemon fue liberado existosamente!\n"reset);
