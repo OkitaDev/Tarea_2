@@ -9,6 +9,7 @@ Cosas a Considerar del Código:
 según sea el caso, sin embargo, esto no afecta la integridad del código, por ejemplo, en la funcion evolucionar
 pokemon, cuando ingresa una evolucion que no sea la primero, tiene que colocar "No tiene" para que indicarlo que no tiene .
 
+-Si tiene 2 pokemones de distinto nombre pero con el mismo ID pokedex, la cantidad de pokemons atrapados de ese pokemon no se sumará debido a que la clave que se ocupa en el mapa pokedex es por nombre.
 
 Puntos buenos y a mejorar:
 -
